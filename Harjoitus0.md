@@ -43,6 +43,7 @@ Tämä vastaus tarkoitti, että ulkoisesta palvelusta uudelleen ohjattavaa tieto
 ## Muuta
 
 Totesin myös, että Firefoxin verkon seuranta ei näytä portteja tai ainakaan en niitä tässä ajassa löytänyt.
+Myöskään muut protokollat kuin HTTP eivät tällä työkalulla näy.
 
 # Lähteet:
 
