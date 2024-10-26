@@ -117,6 +117,8 @@ Katsoin VirtualBoxin dokumentaatiosta sopivaa asetusta ja näistä Host-only ja 
 Menin KALI virtuaalikoneen asetuksissa "Network" osioon ja valitsin Adapter 2, laitoin sen päälle ja valitsin sen tilaksi Host-only. 
 Metasploitableen laitoin verkkokortin sisäiseksi asetukseksi Host-Only.
 
+Valitsin molemmille laitteille saman ethernet adapterin.
+
 Käynnistin molemmat koneet.
 
 Etsin ensin Metasploitable koneen IP-osoitteen komennolla ip addr
@@ -130,7 +132,7 @@ Koetin vielä ennen, että en ole yleiseen verkkoon yhteydessä komennolla 'ping
 
 ![kuva](https://github.com/user-attachments/assets/4b15092d-3ead-4889-9e7d-a09e59f5b209)
 
-En ollut verkossa, yritin pingata metasploitablea.
+En ollut julkisessa verkossa, yritin pingata metasploitablea.
 
 ![kuva](https://github.com/user-attachments/assets/084058dc-8154-48d8-b0a4-e56c333482e4)
 
@@ -171,6 +173,42 @@ Kokeilin vielä onko osoite oikea kirjoittamalla sen selaimeen.
 ![kuva](https://github.com/user-attachments/assets/89e702a3-9312-45b9-8bbb-e0dc43f99ecd)
 
 Vastauksena sain Metasploitablen verkkosivun ja totesin haun onnistuneeksi.
+
+# h) Porttiskannaa Metasploitable
+
+26.10.2024 klo 15:58
+
+Varmistin vielä kerra, ettei kali ollut ihmeen kaupalla mennyt välissä verkkoon.
+
+Nyt kun IP-osoite oli tiedossa, aloitin metasploitablen porttiskannauksen komennolla 'sudo nmap -A -p- 192.168.56.103'
+
+Sain vastaukseksi melkoisen määrän auki olevia portteja.
+
+Ensimmäisenä silmääni iski auki oleva portti 21, johon oli yhteydessä ftp eli File Transfer Protocol.
+Löytämäni artikkelin (https://www.digitalguardian.com/blog/what-ftp-security-securing-ftp-usage) mukaan ftp on vanhentunut tiedoston siirto teknologia, jonka kirjautuminen tapahtuu selkokielisenä ja sen liikenne on salaamatonta.
+Siten sitä vastaan voidaan kohdistaa esimerkiksi kuuntelua, spooffausta tai brute force hyökkäyksiä.
+
+![kuva](https://github.com/user-attachments/assets/6b603b70-5220-4cc8-a2db-030777b6b984)
+
+Toisena silmääni iski mysql portissa 3306
+
+![kuva](https://github.com/user-attachments/assets/f31298b7-4de2-4d96-bfe3-acdce6a47a67)
+
+Ensinnäkin tietokannan portin auki oleminen suoraan verkkoon on riski. Tietokannan versio on oletettavasi vanha ja siinä on mahdollisia haavoittuvuuksia.
+Enemmän minua kuitenkin kiinnostivat rivit Status:autocommit ja Salt.
+MySQL dokumentaatio (https://dev.mysql.com/doc/refman/8.4/en/commit.html) määrittää tilan autocommit siten, että siinä tilassa tehtyjä muutoksia ei voi enää perua, eli jos tietokantaan saataisiin tehtyä muutos, tietoa ei voisi palauttaa ilman varmuuskopiota ja muutos tulisi heti voimaan.
+Saltista mietin, onko tässä kaikille näkyvä salasanojen salt arvo, jonka kaikille näkyminen helpottaisi huomattavasti salasanan tiivisteen murtamista.
+
+Viimeisenä katsoin vielä porttia 23, eli Telnet.
+
+Telnet
+
+
+
+
+
+
+
 
 
 
