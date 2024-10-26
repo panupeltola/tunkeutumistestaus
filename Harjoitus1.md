@@ -28,7 +28,38 @@
 6. Käsky ja hallinta --> Etähallittavan yhteyden mahdollistaminen kohteeseen
 7. Tavoitteisiin johtavat toimet --> Tavoitteiden toteuttaminen, kuten tiedon varastaminen
 
-## 
+## The Art of Hacking
+
+4.1
+
+- Aktiivisessa tarkailussa lähetetään paketteja kohteeseen
+- Esimerkkinä porttiskannaus
+- Tiedustelu alkaa olemaan "äänekkäämpää" tai tunnistettavaa
+
+4.2
+
+- Ennakkoon selvittäminen on tärkeää, jotta selviää mihin laitteisiin kannattaa hyökätä
+- Verkon rakenne on tärkeää ymmärtää ennen haavoittuvuuksien selvittämistä
+- Tämä on "äänekästä" tutkimista
+
+4.3
+
+- Nmap on paras porttiskanneri
+- Pitkäaikainen työkalu, jota on tutkittu paljon
+- Masscan on nopein verkkoskanneri, saman tyyppinen kuin nmap
+- Nopeampi, muttei yhtä monipuolinen
+- Skannerit tarkkailevat yleensä TCP portteja
+- nmapin '-Pn' komento ei ohita porttia, vaikka se näkyisi epäaktiivisena porttiskannausken aikana
+- UDP skannaus antaa myös paljon tietoa kohteesta
+- EyeWitness näyttää nopeasti monesta sivusta koosteen
+- Helpottaa porttiskannauksessa löydettyjen tulosten analysointia
+
+4.4
+
+- Erillisiä verkon ja verkkosovelluksien haavoittuvuusskannereita
+- Nmap kykyenee myös haavoittuvuusskannauksiin
+
+
 
 # a) Asenna Kali
 
@@ -253,4 +284,7 @@ Tämän portin kautta voisi saada siis koneeseen etähallinnan. (https://web.syn
 5. V. Bajarami, 2020, Running a quick NMAP scan to inventory my network, https://www.redhat.com/en/blog/quick-nmap-inventory, Luettu 26.10.2024
 6. N. Lord, 2024, What is FTP Security? Securing FTP Usage, https://www.digitalguardian.com/blog/what-ftp-security-securing-ftp-usage, Luettu 26.10.2024
 7. Oracle, 2024, 15.3.1 START TRANSACTION, COMMIT, and ROLLBACK Statements, https://dev.mysql.com/doc/refman/8.4/en/commit.html, luettu 26.10.2024
-8. Synametrics Technologies, Security risks involved with running Telnet client and server, https://web.synametrics.com/risks-running-telnet.htm, luettu 26.10.2024  
+8. Synametrics Technologies, Security risks involved with running Telnet client and server, https://web.synametrics.com/risks-running-telnet.htm, luettu 26.10.2024
+9. J. Rhysider ja J. Cox, 2024, Darknet Diaries EP 146: ANOM, https://darknetdiaries.com/episode/146/, Kuunneltu 26.10.2024
+10. Hutchins et al 2011: Intelligence-Driven Computer Network Defense Informed by Analysis of Adversary Campaigns and Intrusion Kill Chains, chapters Abstract, 3.2 Intrusion Kill Chain
+11. Santos et al: The Art of Hacking (Video Collection): 4.3 Surveying Essential Tools for Active Reconnaissance    
