@@ -153,7 +153,7 @@ Testattuani nämä asiat suljin demonit komennolla 'sudo systemctl stop apache2 
 
 # e) Asenna Metasploitable 2
 
-Käytin tässä ja seuraavassa kohdassa ohjeena Tuomas Valkamon raporttia samasta aiheesta. Pyrin kuitenkin tekemään työn mahdollisimman pitkälle itse ja turvautumaan raporttiin vain jos en millään pääse eteenpäin.
+Käytin tässä ja seuraavassa kohdassa ohjeena Tuomas Valkamon raporttia samasta aiheesta (https://tuomasvalkamo.com/PenTestCourse/week-2/). Pyrin kuitenkin tekemään työn mahdollisimman pitkälle itse ja turvautumaan raporttiin vain jos en millään pääse eteenpäin.
 Latasin Metasploitable 2 virtuaalikoneen osoitteesta https://sourceforge.net/projects/metasploitable/, otin linkin ohjeesta koska tällä hakusanalla löytyi erittäin paljon muutakin googlesta.
 Ladattuani paketin purin sen.
 
