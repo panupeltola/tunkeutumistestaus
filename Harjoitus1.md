@@ -186,6 +186,8 @@ Aloitin verkon määrittämisen katsomalla miten verkon voisi luoda. Totesin, et
 
 ![kuva](https://github.com/user-attachments/assets/2dbc2fa1-c790-4d27-b6d6-3819deefa707)
 
+Kuva (https://www.virtualbox.org/manual/ch06.html)
+
 Katsoin VirtualBoxin dokumentaatiosta sopivaa asetusta ja näistä Host-only ja Internal näyttäisivät olevan täysin sisäiseen keskittyviä, joten valitsin näistä Host-only verkon.
 
 
@@ -303,4 +305,5 @@ Tämän portin kautta voisi saada siis koneeseen etähallinnan. (https://web.syn
 8. Synametrics Technologies, Security risks involved with running Telnet client and server, https://web.synametrics.com/risks-running-telnet.htm, luettu 26.10.2024
 9. J. Rhysider ja J. Cox, 2024, Darknet Diaries EP 146: ANOM, https://darknetdiaries.com/episode/146/, Kuunneltu 26.10.2024
 10. Hutchins et al 2011: Intelligence-Driven Computer Network Defense Informed by Analysis of Adversary Campaigns and Intrusion Kill Chains, chapters Abstract, 3.2 Intrusion Kill Chain
-11. Santos et al: The Art of Hacking (Video Collection): 4.3 Surveying Essential Tools for Active Reconnaissance    
+11. Santos et al: The Art of Hacking (Video Collection): 4.3 Surveying Essential Tools for Active Reconnaissance
+12. VirtualBox documentation, Chapter 6. Virtual Networking, https://www.virtualbox.org/manual/ch06.html, Luettu 26.10.2024    
