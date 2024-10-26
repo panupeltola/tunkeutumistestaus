@@ -14,7 +14,7 @@
 - 16 Gt RAM
 - Kali Linux 2024.3
 
-# x)
+# x) Lue/katso/kuuntele ja tiivistä
 
 ## Darknet Diaries jakso 146 ANOM
 
