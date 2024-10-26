@@ -31,8 +31,6 @@ Yhteydessä oleva verkkokortti, verkkoyhteys todettu a) kohdassa toimivaksi.
 Tilaksi valittu "Not attached"
 Näin verkkokortin pitäisi olla poissa verkosta.
 
-![kuva](https://github.com/user-attachments/assets/56d53865-c86f-4790-9616-b960e311cc17)
-
 Koetin komentoa 'ping 8.8.8.8'
 
 ![kuva](https://github.com/user-attachments/assets/93f6db76-6014-4fd5-9ede-b465f83867e9)
