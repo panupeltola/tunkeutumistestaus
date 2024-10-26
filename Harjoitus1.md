@@ -289,6 +289,8 @@ Telnet on vanhentunut etäkäyttöprotokolla, josta puuttuu SSH:n mukaiset suoja
 Tämän portin kautta voisi saada siis koneeseen etähallinnan. (https://web.synametrics.com/risks-running-telnet.htm)
 
 
+**Panu Peltola**
+
 # Lähteet
 
 1. T. Karvinen, 2024, Tunkeutumistestaus, https://terokarvinen.com/tunkeutumistestaus/, Luettu 26.10.2024
