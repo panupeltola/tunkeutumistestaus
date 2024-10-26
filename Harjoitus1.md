@@ -1,5 +1,35 @@
 # Harjoitus 1
 
+# x)
+
+## Darknet Diaries jakso 146 ANOM
+
+- Käytiin läpi ANOM puhelinta
+- Yksityisyyteen keskittyvä puhelin, joka oli ns. rikollisilta rikollisille puhelin
+- Päästä päähän salatussa liikenteessä ongelmana, että kaikki liikkui myös FBI:n palvelimille
+- Todellisuudessa honeypot ja jokaista puhelinta seurattiin kansainvälisessä yhteistyössä
+- FBI ei saanut kuunnella oman maan asukkaita, joten ainakin teoriassa seurattiin vain ulkomaalaisia keskusteluja
+- Nosti esiin hyviä pointteja esimerkiksi miten rikollisuus, jota saadaan seurata määritetään
+- Hyvänä pointtina on myös, miten digitaaliseen liikenteeseen liittyvää yksityisyyttä kunnioitetaan suhteessa vähemmän kuin fyysistä yksityisyyttä
+- Mobiililaitteita voidaan tutkia satunnaisemmin kuin koteja
+- Nosti myös kysymyksen millainen valmius vakoiluun jää valtioilla, vaikka operaatio on loppunut
+
+##  Intrusion Kill Chain
+
+- Systemaattinen prosessi tunnistaa haluttu kohde ja saavuttaa halutut vaikutukset
+- Samat askeleet vaaditaan halutun vaikutuksen saamiseen
+- Askeleet lyhyesti:
+
+1. Tarkkailu --> Kohteen tutkiminen ja hyökkäykseen vaadittavien tietojen kerääminen kohteesta
+2. Aseistaminen --> Hyökkäävän ohjelmiston kiinnittäminen hyötykuormaan
+3. Toimittaminen --> Haittapaketin siirtäminen kohteeseen
+4. Hyväksikäyttö --> Haavoittuvuuden hyväksikäyttäminen kohteeseen tunkeutumista varten
+5. Asentaminen --> Haitan tai takaoven asentaminen kohteeseen
+6. Käsky ja hallinta --> Etähallittavan yhteyden mahdollistaminen kohteeseen
+7. Tavoitteisiin johtavat toimet --> Tavoitteiden toteuttaminen, kuten tiedon varastaminen
+
+## 
+
 # a) Asenna Kali
 
 26.10.2024 14:18
