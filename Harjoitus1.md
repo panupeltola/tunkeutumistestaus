@@ -201,7 +201,11 @@ Saltista mietin, onko tässä kaikille näkyvä salasanojen salt arvo, jonka kai
 
 Viimeisenä katsoin vielä porttia 23, eli Telnet.
 
-Telnet
+![kuva](https://github.com/user-attachments/assets/5732fea6-1261-4d14-856a-e9c94edb9971)
+
+
+Telnet on vanhentunut etäkäyttöprotokolla, josta puuttuu SSH:n mukaiset suojaukset, kuten avainparitunnistus, päästä päähän salattu liikenne ja kirjautumisen brute force estot.
+Tämän portin kautta voisi saada siis koneeseen etähallinnan.
 
 
 
