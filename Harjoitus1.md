@@ -184,11 +184,15 @@ Nyt kun IP-osoite oli tiedossa, aloitin metasploitablen porttiskannauksen komenn
 
 Sain vastaukseksi melkoisen määrän auki olevia portteja.
 
+## FTP
+
 Ensimmäisenä silmääni iski auki oleva portti 21, johon oli yhteydessä ftp eli File Transfer Protocol.
 Löytämäni artikkelin (https://www.digitalguardian.com/blog/what-ftp-security-securing-ftp-usage) mukaan ftp on vanhentunut tiedoston siirto teknologia, jonka kirjautuminen tapahtuu selkokielisenä ja sen liikenne on salaamatonta.
 Siten sitä vastaan voidaan kohdistaa esimerkiksi kuuntelua, spooffausta tai brute force hyökkäyksiä.
 
 ![kuva](https://github.com/user-attachments/assets/6b603b70-5220-4cc8-a2db-030777b6b984)
+
+## MySQL
 
 Toisena silmääni iski mysql portissa 3306
 
@@ -198,6 +202,8 @@ Ensinnäkin tietokannan portin auki oleminen suoraan verkkoon on riski. Tietokan
 Enemmän minua kuitenkin kiinnostivat rivit Status:autocommit ja Salt.
 MySQL dokumentaatio (https://dev.mysql.com/doc/refman/8.4/en/commit.html) määrittää tilan autocommit siten, että siinä tilassa tehtyjä muutoksia ei voi enää perua, eli jos tietokantaan saataisiin tehtyä muutos, tietoa ei voisi palauttaa ilman varmuuskopiota ja muutos tulisi heti voimaan.
 Saltista mietin, onko tässä kaikille näkyvä salasanojen salt arvo, jonka kaikille näkyminen helpottaisi huomattavasti salasanan tiivisteen murtamista.
+
+## Telnet 
 
 Viimeisenä katsoin vielä porttia 23, eli Telnet.
 
