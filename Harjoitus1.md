@@ -211,17 +211,16 @@ Viimeisenä katsoin vielä porttia 23, eli Telnet.
 
 
 Telnet on vanhentunut etäkäyttöprotokolla, josta puuttuu SSH:n mukaiset suojaukset, kuten avainparitunnistus, päästä päähän salattu liikenne ja kirjautumisen brute force estot.
-Tämän portin kautta voisi saada siis koneeseen etähallinnan.
+Tämän portin kautta voisi saada siis koneeseen etähallinnan. (https://web.synametrics.com/risks-running-telnet.htm)
 
 
+# Lähteet
 
-
-
-
-
-
-
-
-
-
-
+1. T. Karvinen, 2024, Tunkeutumistestaus, https://terokarvinen.com/tunkeutumistestaus/, Luettu 26.10.2024
+2. T. Valkamo, 2022, Hacking into a Target Using Metasploit, https://tuomasvalkamo.com/PenTestCourse/week-2/, Luettu 26.10.2024
+3. Geeks for Geeks, 2022, How to install Metasploitable 2 in VirtualBox, https://www.geeksforgeeks.org/how-to-install-metasploitable-2-in-virtualbox/, Luettu 26.10.2024
+4. 'man nmap'
+5. V. Bajarami, 2020, Running a quick NMAP scan to inventory my network, https://www.redhat.com/en/blog/quick-nmap-inventory, Luettu 26.10.2024
+6. N. Lord, 2024, What is FTP Security? Securing FTP Usage, https://www.digitalguardian.com/blog/what-ftp-security-securing-ftp-usage, Luettu 26.10.2024
+7. Oracle, 2024, 15.3.1 START TRANSACTION, COMMIT, and ROLLBACK Statements, https://dev.mysql.com/doc/refman/8.4/en/commit.html, luettu 26.10.2024
+8. Synametrics Technologies, Security risks involved with running Telnet client and server, https://web.synametrics.com/risks-running-telnet.htm, luettu 26.10.2024  
