@@ -1,5 +1,19 @@
 # Harjoitus 1
 
+# Ympäristö:
+
+## Fyysinen ympäristö:
+- Intel i7-10700K @ 3,80GHz (AMD64)
+- Nvidia RTX 3080
+- 32 Gt RAM
+- Windows 11 Education 23H2
+
+## Virtuaaliympäristö (Kali)
+- Oracle VirtualBox
+- 8 Prosessoriydintä
+- 16 Gt RAM
+- Kali Linux 2024.3
+
 # x)
 
 ## Darknet Diaries jakso 146 ANOM
