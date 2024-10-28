@@ -73,6 +73,19 @@
 - Erillisiä verkon ja verkkosovelluksien haavoittuvuusskannereita
 - Nmap kykyenee myös haavoittuvuusskannauksiin
 
+EDIT 28.10.2024: KKO jutun tiivistäminen on jäänyt tekemättä alkuperäisen palautuksen yhteydessä, lisätty
+
+## KKO:2003:36
+
+- Kertoo oikeusjutusta, jossa A oli porttiskannannut Osuuspankin tietojärjestelmää
+- Käräjillä syyttäjä ilmoitti skannauksen tarkoituksen olevan tietojärjestelmään murtautuminen
+- Käräjäoikeus hylkäsi syytteen, vaikka pitikin todennäköisenä, että kone josta skannaus oli tehty oli syytetyn, mutta tekijää ei voitu varmasti tunnistaa
+- Sai syytteen tietoliikenteen häirinnästä
+- 17 vuotiasta pidetään ATK alan asiantuntijana kuulostaa oudolta
+- Omasta mielestäni logiikka "olisi murtautunut jos olisi porttiskannauksessa siihen mahdollisuuden löytänyt" on parin väliaskeen yli hyppäämistä.
+- Loppuratkaisu oli sakkorangaistus
+- Jos jotain tästä opimme, niin ei porttiskannaa järjestelmiä, joihin ei ole lupaa.
+
 
 
 # a) Asenna Kali
