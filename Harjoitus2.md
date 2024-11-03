@@ -422,4 +422,4 @@ Tätä työkalua pitää käyttää jatkossa, jotta myös tulosteet jäävät se
 4. T. Valkamo, 2022, Hacking into a Target Using Metasploit, https://tuomasvalkamo.com/PenTestCourse/week-2/, Luettu 3.11.2024
 5. Rapid7, Working with Payloads, https://docs.rapid7.com/metasploit/working-with-payloads/, Luettu 3.11.2024
 6. OffSec, Meterpreter Basics, https://www.offsec.com/metasploit-unleashed/meterpreter-basics/, Luettu 3.11.2024
-7. € Jaswal 2020: Mastering Metasploit - 4ed: Chapter 1: Approaching a Penetration Test Using Metasploit
+7. € Jaswal 2020: Mastering Metasploit - 4ed: Chapter 1: Approaching a Penetration Test Using Metasploit, Luettu 3.11.2024
