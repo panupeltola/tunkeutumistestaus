@@ -359,7 +359,9 @@ Se oli siellä! Tyhmästä päästä kärsi koko kroppa jälleen.
 
 # k) Meterpreterin ominaisuudet
 
+
 ## Ensimmäinen epäonnistuminen (ei viimeinen)
+
 
 ![kuva](https://github.com/user-attachments/assets/32d1a06c-aafe-4667-8a4f-7268708948c1)
 
