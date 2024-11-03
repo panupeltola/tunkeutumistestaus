@@ -359,12 +359,14 @@ Se oli siellä! Tyhmästä päästä kärsi koko kroppa jälleen.
 
 # k) Meterpreterin ominaisuudet
 
+## Ensimmäinen epäonnistuminen (ei viimeinen)
+
 ![kuva](https://github.com/user-attachments/assets/32d1a06c-aafe-4667-8a4f-7268708948c1)
 
 En saanut Meterpreter sessiota näkymään, vaikka se tulosteen mukaan pitäisikin toimia.
 Muistan luennolla nähneeni, että sessiot pitäisi näkyä erikseen. En löytänyt aiheesta mitään ohjetta, muuta kuin loputtomia vastauksettomia foorumikeskusteluja. En löytänyt tähän ongelmaan ratkaisua.
 
-3.11.2024 klo 13:48
+## Jatkuu 3.11.2024 klo 13:48
 
 Jatkuu tästä, nyt sain session toimimaan.
 
