@@ -19,6 +19,24 @@
 - 2 Gt RAM
 - Metasploitable 2.0
 
+# x) 
+
+## Mastering Metasploit
+
+- Exploit on koodin palanen, joka hyväksikäyttää haavoittuvuutta
+- Payload on onnistuneen exploitin jälkeen ajettu koodi
+- Auxiliary on moduuli, joka tarjoaa lisää funktionaalisuutta
+- Encoderit ohittavat suojausjärjestelmiä
+- Meterpreter on haittaohjelma joka saa suuret oikeudet
+- Nmap ja tietokannat helpottavat Metasploitin käyttöä.
+
+- Metasploit on avoimen lähdekoodin Framework, mikä mahdollistaa omien työkalujen asentamisen siihen
+- Hyvä suuriin verkkoihin ja payloadien välillä vaihtelu helppoa
+- Metasploitilla voi hakea haavoittuvuuksia, sekä niiden laatua
+- Automaattinen hyökkäyksen ajaminen ja exploitti
+- Toimii myös Windows koneille
+- Myös Metasploitin käytössä tulee esiin Kill Chain
+
 # a) Verkkojen toimivuus
 
 **3.11.2024 10:05**
