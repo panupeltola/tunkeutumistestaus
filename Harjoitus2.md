@@ -370,7 +370,7 @@ Muistan luennolla nähneeni, että sessiot pitäisi näkyä erikseen. En löytä
 
 ## Jatkuu 3.11.2024 klo 13:48
 
-Jatkuu tästä, nyt sain session toimimaan.
+Jatkuu tästä, nyt sain session toimimaan poistettuani palomuurin käytöstä.
 
 Löysin komennoista selkeämmän listauksen meterpreterin help komennon tueksi (https://www.offsec.com/metasploit-unleashed/meterpreter-basics/)
 
