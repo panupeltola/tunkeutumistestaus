@@ -254,6 +254,44 @@ Lopuksi katsoin vielä Apache2 Name Based Virtual Hostingin tiedot.
 
 Tätä ei ehkä voi käyttää lateraaliseen liikkumiseen, mutta tästä saan selville dokumenttipolut eri verkkosivuille.
 
+# j) Muratudu toisella tapaa
+
+Katsoin auki olevia palveluita ja päätin yrittää Sambaa.
+Hain komennolla 'search Samba 3.0.20' koska se näkyi versioissa ja löysin haavoittuvuuden
+
+![kuva](https://github.com/user-attachments/assets/4e2d9b0f-54ac-4fd8-98a3-d8899562509d)
+
+Ajoin komennon 'use 0'
+
+Säädin asetukset kuntoon:
+
+![kuva](https://github.com/user-attachments/assets/f61fc9b8-c1c6-4526-b4ca-b3aaff8e8465)
+
+Ajoin komennon 'exploit'
+
+Sain vain vastaukseski, että exploit complete, no session was created.
+
+Päätin käynnistää molemmat koneet uudelleen.
+
+# l) Tallenna scriptillä
+
+Ajoin ohjeessa olleen komennon script -fa log001.txt ja totesin sen tallentavan kaiken, mitä terminaalissa tekee, myös metasploitin sisällä.
+
+![kuva](https://github.com/user-attachments/assets/0abca971-55b4-4591-b6cf-ab7355e05185)
+
+*Esimerkki*
+
+Tämä on varmasti kätevä omien tekojen ja jälkien seuraamiseen. Scriptin sai suljettua komennolla 'exit'.
+
+
+
+
+
+
+
+
+
+
 
 
 
