@@ -27,10 +27,12 @@ Aloitin testaamalla, että verkot toimivat keskenään, mutta Kali ei ole yhteyd
 Tein tämän pingaalmalla molemmilla koneilla osoitetta 8.8.8.8 komennolla 'ping 8.8.8.8'
 
 ![kuva](https://github.com/user-attachments/assets/74b49bb2-0b8d-452d-b014-01b667d268f4)
+
 *Kali ei julkisessa verkossa*
 
 ![kuva](https://github.com/user-attachments/assets/ffa17500-cf13-4e4f-8389-ceacf08fe472)
-*Metasploitable ei julkisessa verkossa
+
+*Metasploitable ei julkisessa verkossa*
 
 
 
