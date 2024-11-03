@@ -150,16 +150,26 @@ Vastaukseksi sain miellyttävän raportin luettavaksi, jossa tärkeänä tietona
 Muuten tässä on enemmän tietoa, kuin Metasploitin tietokannassa. Suuri osa infosta on tiivistetty pois Metasploitin tietokannasta, mutta se on sitä kautta paljon nopeampi ja helppokäyttöisempi.
 Siinä tulee myös eri avoimet portit esiin hostin kera, nmapin omassa tulosteessa nämä on itse hallittava esimerkiksi tiedostonimillä.
 
-Metasploit DB hyödyt ja haitat:
+## Metasploit DB hyödyt ja haitat:
+
+### Hyödyt
+
 + Helppo katsoa montaa laitetta kerralla
 + Tärkeimmät infot, kuten palvelu ja versio näkyvät
 + Listaa hostit samalla
 
+### Haitat
+
 - Helppolukuisuuden varjolla tietoa jätetty näyttämättä
 
-Nmapin tulosteen hyödyt ja haitat:
+## Nmapin tulosteiden hyödyt ja haitat:
+
+### Hyödyt
+
 + Usea eri tiedostomuoto, joista voi käsitellä dataa itselleen sopivalla tavalla
 + Tarkka tuloste, jossa näkyy kaikki skannauksen tiedot
+
+### Haitat
 
 - Vain yksi skannaus per tuloste, ellei yhdistele
 - Hostit ja ajantasaisuus työläämpi tarkistaa.
