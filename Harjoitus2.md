@@ -160,19 +160,115 @@ Siinä tulee myös eri avoimet portit esiin hostin kera, nmapin omassa tulostees
 
 ### Haitat
 
-- Helppolukuisuuden varjolla tietoa jätetty näyttämättä
+- Helppolukuisuuden varjolla tietoa jätetty näyttämättä.
 
 ## Nmapin tulosteiden hyödyt ja haitat:
 
 ### Hyödyt
 
-+ Usea eri tiedostomuoto, joista voi käsitellä dataa itselleen sopivalla tavalla
-+ Tarkka tuloste, jossa näkyy kaikki skannauksen tiedot
++ Usea eri tiedostomuoto, joista voi käsitellä dataa itselleen sopivalla tavalla.
++ Tarkka tuloste, jossa näkyy kaikki skannauksen tiedot.
 
 ### Haitat
 
-- Vain yksi skannaus per tuloste, ellei yhdistele
+- Vain yksi skannaus per tuloste, ellei yhdistele manuaalisesti.
 - Hostit ja ajantasaisuus työläämpi tarkistaa.
+
+# g) Murtaudu Metasploitablen
+
+Aloitin tarkastamalla Metasploitablen vsftp demonin version. Tein sen komennolla 'services -S ftp'
+
+![kuva](https://github.com/user-attachments/assets/78864763-585e-4f4a-9de1-78b404ca1de4)
+
+Vastauksesta näin, että versio on vsftpd 2.3.4. Yritin etsiä seuraavaksi tähän liittyvää haavoittuvuutta komennolla 'search vsftpd 2.3.4'
+
+![kuva](https://github.com/user-attachments/assets/2a3007c2-fe0f-4011-930f-55acc9278532)
+
+Tämä löytyi, käytin ehdotettua komentoa 'use 0'
+
+Tässä vaiheessa muistin vain, että piti asettaa RHOST, mutten omuistanut enää tarkkaan miten se tehtiin. Katsoin T. Karvisen läksyn ohjeista esimerkki komentoja ja löysin komennon 'setg RHOST'
+Muokkasin tähän Metasploitablen IP-osoitteen ja ajoin komennon 'setg RHOST 192.168.56.103'
+
+![kuva](https://github.com/user-attachments/assets/f0a35120-b2b7-4918-aa54-b3dbb2e27d83)
+
+Yrittäessäni ajaa tämän jälkeen komentoa 'exploit' päästäkseni murtamaan koneeseen, sain virheilmoitukseksi, ettei RHOSTS onnistunut validoimaan.
+Katsoin jo aiemmin komennolla 'show options' että tämä kohta oli tyhjä.
+Yritin tämän jälkeen lisätä RHOSTIA komennolla se RHOST 192.168.56.103.
+
+Tällä kertaa se näkyy myös RHOST osiossa.
+
+![kuva](https://github.com/user-attachments/assets/db630616-668e-46cd-b572-497b2f013a6a)
+
+Yritin uudelleen ajaa komentoa 'exploit'
+
+![kuva](https://github.com/user-attachments/assets/59e10bb0-a749-4e09-ae00-59fa57dceb81)
+
+Tällä kertaa komento toimi. Otin vielä itselleni mukavamman näkymän. Valitettavasti ajoin komennot niin nopeasti, että en tiedä oliko komento 'shell' vai 'bash' se mikä minulle tämän näkymän antoi.
+
+# h) Meterpreter ylennys
+
+Yrittäessäni nostaa sessiota komennolla 'sessions-u 1' Meterpreteriksi sain aina saman vastauksen.
+
+![kuva](https://github.com/user-attachments/assets/3a7ae241-5e7a-4916-8886-194fa8b8f0d7)
+
+En keksinyt tähän ratkaisua googlaamalla, sillä tämä toimi edellisellä koneellani ja sain ongelmitta yhtyden toiseen koneeseen.
+
+Myös sessio ID on oikein
+
+![kuva](https://github.com/user-attachments/assets/c9e68e06-187c-441a-9732-29f6cfc0ac23)
+
+
+Päätin jatkaa eteenpäin. Yritän katsoa myöhemmässä tehtävässä jonkin valmiin MeterPreter payloadin omaavan tiedoston, jotta pystyn näyttämään sen ominaisuuksia.
+
+# i)
+
+Hain ensin kaikki salasanojen tiivisteet komennolla 'cat /etc/shadow'
+
+![kuva](https://github.com/user-attachments/assets/bd4f74e8-7a33-4390-8c03-42dc02ab9eac)
+
+Näitä salasanoja käyttämällä voi saada murrettua muiden käyttäjien salasanoja ja sitä kautta mahdollisesti uusia käyttöoikeuksia eri palveluihin.
+Salasan tiivistefunktio saadaan $1$ alkuisista tiivisteistä. Koko tiiviste koostuu seuraavista osista "$id$salt$encrypted" eli ensimmäinen osa on ID joka kertoo tiivisteen olevan muotoa MD5, seuraava suola arvo ja viimeisenä salattu salasana.
+
+Seuraavaksi tutkin mitä tiedostoja koneella olisi.
+
+Menin kansiopolkuun /home/msfadmin/vulnerable/mysql-ssl/mysql-keys
+
+Sieltä löysin MySQL palvelimen avaimet salaamattomassa muodossa.
+
+![kuva](https://github.com/user-attachments/assets/e84a0039-6ed7-4168-83ef-92a2c35d63ac)
+
+Näillä voidaan murtaa tietokantapalvelimen salattu liikenne ja viestintä.
+
+Ajoin myös komennon 'cat/etc/passwd'
+
+![kuva](https://github.com/user-attachments/assets/a00631a7-445a-418f-ac3f-78b0ca6a562a)
+
+Tästä näin kaikki koneen käyttäjät ja samalla kaikki palvelut, joilla on käyttäjä koneella.
+
+Näistä silmääni iski sshd rivin loppu /usr/sbin/nologin
+
+
+Lopuksi katsoin vielä Apache2 Name Based Virtual Hostingin tiedot.
+
+![kuva](https://github.com/user-attachments/assets/391691ba-1e13-4434-a783-61bd8acaec4b)
+
+Tätä ei ehkä voi käyttää lateraaliseen liikkumiseen, mutta tästä saan selville dokumenttipolut eri verkkosivuille.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
