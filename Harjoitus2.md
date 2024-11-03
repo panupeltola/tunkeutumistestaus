@@ -77,18 +77,73 @@ Tästä pääteltynä jäljelle jää vain edellä mainittu osoite.
 
 # d) Skannaa Metasploitablen portit
 
-Seuraavaksi skannasinn kaikki Metasploitablen yleisimmät portit komennolla 'db_nmap nmap -A -p- 192.168.56.103' joka tallentaa tiedot Metasploitin tietokantaan ja 'nmap -A -p- -oA foo 192.168.56.103'
+Seuraavaksi skannasinn kaikki Metasploitablen yleisimmät portit komennolla 'db_nmap nmap -A -p- 192.168.56.103' joka tallentaa tiedot Metasploitin tietokantaan ja 'sudo nmap -A -p- -oA foo 192.168.56.103'
 En ollut täysin varma onko nmapin tallennuksen funktio oikein, mutta päätin sitä silti kokeilla ja korjaan sen jos se ei toimisi.
 Nmapin vaihtoehto 'oA' on esitetty seuraavalla tavalla sen ohjeissa:
 -oA <basename>: Output in the three major formats at once
 
 Ajoin komennot.
 
-
-
 ![kuva](https://github.com/user-attachments/assets/13e751f7-fbe8-496c-9b85-ff7dede4823f)
 
 *'db_nmap nmap -A -p- 192.168.56.103'*
+
+
+![kuva](https://github.com/user-attachments/assets/fe9a32c0-0e7c-464c-9d48-7b48d122c02b)
+
+*'sudo nmap -A -p- -oA foo 192.168.56.103'*
+
+
+![kuva](https://github.com/user-attachments/assets/1a8d9a5b-016d-4f7e-bbc7-7fc4dea5de39)
+
+Myös syntaksi näytti olleen oikea, sillä kolme uutta tiedostoa oli ilmestynyt hakemistoon.
+
+# e) Hae tietokannoista
+
+Ajoin ensimmäisenä Metasploitin konsolissa komennot 'hosts' ja 'services'
+
+![kuva](https://github.com/user-attachments/assets/7e33f0da-4db5-44e3-aad7-e4d14308dafb)
+
+Sain vastaukseksi pitkän listan verkonskannauksen 'db_nmap -sn 192.168.56.0/24' löytämistä laitteista, sekä porttiskannauksen 'db_nmap nmap -A -p- 192.168.56.103' löytämistä avoimista palveluista.
+
+Hosts listassa oli kaikki laitteet, niiden tyyppi sekä käyttöjärjestelmä, mikäli se oli saatu.
+
+Services listassa oli host, jolla palvelu oli auki, palvelun portti, protokolla, palvelun nimi sekä siihen liittyvät lisätiedot.
+
+Seuraavaksi halusin hakea Services osioista ftp liittyviä tietoja.
+Yritin ensin komennolla 'services | grep vsftp' tästä sain vain virheilmoituksen "Invalid host parameter, |."
+Päätin seuraavaksi yrittää komentoa 'grep ftp'. Tästä sain kuitenkin vain ohjeen apuikkunan auki, enkä mitään oikeaa tietoa. Pitänee kerrata taas grepin käyttö.
+
+Lopuksi yritin vielä komentoa 'services -h' nähdäkseni onko tähän valmista hakutoimintoia
+
+![kuva](https://github.com/user-attachments/assets/bcbc504f-43a2-49b5-a76b-7b0be918711d)
+
+Ilokseni huomasin, että tässä on suora '-S' hakuvaihtoehto.
+Ajoin komennon 'services -S ftp'
+
+![kuva](https://github.com/user-attachments/assets/ecc8a5b2-6fe6-4be7-90df-d9a90e820d6f)
+
+Sain vastaukseksi vain filtterin sisältämät tiedot. Koetin vielä samaa komentoa hosts kenttään hakusanalla "Linux"
+
+![kuva](https://github.com/user-attachments/assets/1cdcf730-261d-47e2-84ce-e30b58aa3a23)
+
+Löysin ainoan Linux koneeni listalta. Nämä hakutoiminnot itsessään jo ovat erittäin hyvä tapa selvittää potentiaalisia kohteita.
+
+# f) Vertailu
+
+Tutkin ensin miltä avatut tiedostot näyttävät.
+
+Tiedostomuodoista vain .xml on itselleni tuttu ja tiedän sen olevan selkokielinen. Avasin sen komennolla 'less foo.xml'
+
+Tiedon määrä oli aivan liikaa, sillä palveluun oli tallennettu kaikki skannauksessa saatu tieto
+
+Seuraavaksi kertasin grepin käyttöä ja hain ftp liittyviä rivejä. Hain komennolla 'grep 'ftp' foo.xml'
+
+![kuva](https://github.com/user-attachments/assets/e13329fe-8286-4b51-9550-fcbb155c6c9d)
+
+
+
+
 
 
 
