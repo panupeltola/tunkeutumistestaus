@@ -141,6 +141,31 @@ Seuraavaksi kertasin grepin käyttöä ja hain ftp liittyviä rivejä. Hain kome
 
 ![kuva](https://github.com/user-attachments/assets/e13329fe-8286-4b51-9550-fcbb155c6c9d)
 
+Mietin, että tämäkin on vielä aika kamalan näköistä ilman erillistä ohjelmaa, joka osaisi rikkoa tiedon luettavaan muotoon. Yritin seuraavaksi onko foo.nmap selkokielistä luettavaa komennolla 'less foo.nmap'
+
+![kuva](https://github.com/user-attachments/assets/d61cc767-9c89-48d1-9f2b-b997e16290ab)
+
+Vastaukseksi sain miellyttävän raportin luettavaksi, jossa tärkeänä tietona on ylärivillä löytyneet Nmapin versio, skannauksen aika seskä ajettu komento.
+
+Muuten tässä on enemmän tietoa, kuin Metasploitin tietokannassa. Suuri osa infosta on tiivistetty pois Metasploitin tietokannasta, mutta se on sitä kautta paljon nopeampi ja helppokäyttöisempi.
+Siinä tulee myös eri avoimet portit esiin hostin kera, nmapin omassa tulosteessa nämä on itse hallittava esimerkiksi tiedostonimillä.
+
+Metasploit DB hyödyt ja haitat:
++ Helppo katsoa montaa laitetta kerralla
++ Tärkeimmät infot, kuten palvelu ja versio näkyvät
++ Listaa hostit samalla
+
+- Helppolukuisuuden varjolla tietoa jätetty näyttämättä
+
+Nmapin tulosteen hyödyt ja haitat:
++ Usea eri tiedostomuoto, joista voi käsitellä dataa itselleen sopivalla tavalla
++ Tarkka tuloste, jossa näkyy kaikki skannauksen tiedot
+
+- Vain yksi skannaus per tuloste, ellei yhdistele
+- Hostit ja ajantasaisuus työläämpi tarkistaa.
+
+
+
 
 
 
