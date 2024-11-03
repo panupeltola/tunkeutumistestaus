@@ -376,6 +376,9 @@ Löysin komennoista selkeämmän listauksen meterpreterin help komennon tueksi (
 
 Ensimmäisenä silmääni iski download ja upload komennot
 
+![kuva](https://github.com/user-attachments/assets/5be20046-7bea-40bf-aec9-db392e01bc48)
+
+
 Päätin näistä kokeilla downloadia ja latasin koko aiemmin löytämäni SQL avain kokoelman komennolla 'download mysql-keys/'
 
 ![kuva](https://github.com/user-attachments/assets/e909db9e-7856-4880-808b-ea61f32c97ec)
