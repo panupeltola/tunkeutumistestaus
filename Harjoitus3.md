@@ -1,5 +1,118 @@
 # Harjoitus 3 Nuuskija
 
+# a) Hyökkää
+
+Valitsin hyökkäykseksi edellesissä harjoituksessani tekemäni UnrealIRCd hyökkäyksen (https://github.com/panupeltola/tunkeutumistestaus/blob/main/Harjoitus2.md)
+Teen hyökkäyksen samoin, kuin edellisessä harjoituksessa. Kuuntelen tällä kertaa kuitenkin kaiken liikenteen Wiresharkilla.
+Hyökkäys tehdään kahden oikeasta verkosta poistetun virtuaalikoneen välillä, siten ulkopuolisen liikenteen riski ei ole olennainen, eikä tiedoissa ole peiteltävää.
+
+Tein normaalit ping testit tämän varmistaakseni ja säädin metasploitin kuntoon.
+
+![kuva](https://github.com/user-attachments/assets/4a3f4e9c-b676-4050-a364-9aa42401129d)
+
+Valitsin oikean hyökkäyksen, payloadin ja kohteen. Tällä kertaa katson, toimiiko ohjelma kun olen avannut portin 4444 palomuurista. Edellisellä kerralla se aiheutti ongelman, eikä yhdistäminen onnistunut ennen palomuurin sulkemista.
+
+![kuva](https://github.com/user-attachments/assets/a07813d5-6d9c-4e7c-9ebf-e1c167134f30)
+
+Hyökkäys onnistui. Itseäni jäi hyökkäyksessä hämäämään näkyvät echo komennot. Tutkin niiden kohtaloa seuraavissa kohdissa enemmän.
+Hyökkäys itsessään käyttää IRC palvelinta hyökkäyksen toteuttamiseen. Kohteena on UnrealIRCd demoni, joka on avoimen lähdekoodin IRC palvelin. Katsoin nopeasti Wiresharkin kaappaamaa tietoa ja huomasin hyökkäksen ilmeisesti injektoivan shellin telnet yhteyden avulla.
+
+![kuva](https://github.com/user-attachments/assets/83640498-54b3-4091-b50c-15a9b18677f9)
+
+Halusin ensin nähdä, miten koodi toimii ennen sen syvällisempää analyysiä. Analyysi tehdään seuraavissa kahdessa kohdassa. 
+
+# b) Koodi
+
+Minulla ei ollut tällä koneella Microa asennettuna, joten käytin Nanoa. Katsoin käytetyn exploitin viemällä metasploit session taka-alalle CTRL+Z näppäinyhdistelmällä.
+
+Katsoin hyökkäyksen olevan kansiossa unix/irc/unreal_ircd_3281_backdoor.
+
+![kuva](https://github.com/user-attachments/assets/25f3df88-b595-43bd-9153-c55b40afd4bd)
+
+
+Tämän jälkeen avasin tiedoston kulkemalla luennolla opittua polkua sekä tabulaattoria ja avasin tiedoston komennolla 'nano /usr/share/metasploit-framework/modules/exploits/unix/irc/unreal_ircd_3281_backdoor.rb'
+
+Katsoin koodia ja ensimmäisenä tuli vastaan kohteen tiedot määrittelevä kenttä.
+
+![kuva](https://github.com/user-attachments/assets/1e716c5b-e6b5-4a98-a82e-3ea3163eea91)
+
+Siinä määriteltiin sen tiedot ja vaatimukset Metasploitin toimintoja ja hakuominaisuuksia varten.
+
+Tämän alla oli itse haitallinen koodi.
+
+![kuva](https://github.com/user-attachments/assets/022ea0fa-9bf3-44d1-947e-cebd51fc59f3)
+
+Koodi oli erittäin lyhyt.
+
+Ymmärtääkseni koodissa haettiin ensin palvelimen banner tiedot ja käyttäjänimeä pyydettäessä lähetettiin "AB; ja payloadin koodi sekä rivin vaihto"
+
+Halusin ymmärtää hiukan miten tämä pystyi toimimaan. Koodin kuvauksessa mainitaan myös, että tämä käyttää "malicious backdooria" eli oletettavasti takaovi olisi tahallinen.
+
+Googlasin asiaa ja löysin aiheesta bugi-ilmoituksen, jossa asia selitettiin ainakin jollain tasolla.
+Version latausta oli ulkopuolisen tason osalta muokattu ja siihen oli istutettu takaovi, joka teki systeemitason kutsun debuggauksen muodossa.
+Tämä takaovi antoi hyökkääjälle oikeudet ajaa mitä tahansa komentoa palvelinta käyttävän käyttäjän oikeuksilla ja ohitti kaikki salasanat sekä muut turvatoimet (https://www.openwall.com/lists/oss-security/2010/06/14/11)
+
+Parhaan ymmärrykseni mukaan komento "AB;" nimikentässä avasi siis oikeuden hyökkääjälle ajaa haluamansa komennot
+
+# c) snifsnif
+Aloitin ensimmäisestä rivistä ja valitsin siitä "Follow TCP trail"
+
+![kuva](https://github.com/user-attachments/assets/f09ebcbd-6432-42de-90bd-c05ae3d1055e)
+
+Alla näkyi tutun näköinen koodi. "AB;" jälkeen oli kuitenkin itselleni oudon näköistä koodia. Tutkin oliko kyseessä payloadin ajama koodi ja komennolla 'nano /usr/share/metasploit-framework/modules/payloads/singles/cmd/unix/reverse.rb' avasin käyttämäni payloadin lähdekoodin.
+
+![kuva](https://github.com/user-attachments/assets/db311408-89b8-4469-bb01-84cca2e74cbd)
+
+Siitä katsoin, että koodi näyttää samalta, eli vain AB; osa on payloadin osaa.
+Wireshark siis näyttää, että tällä komennolla luotiin telnet yhteys metasploitablen ja hyökkäyskoneen välille.
+
+![kuva](https://github.com/user-attachments/assets/3700f949-44a5-4c04-8742-276372738d57)
+
+Seuraavassa vaiheessa näin, kun payloadin määrittämä portti 4444 lähettää kohteelle echo sanomia.
+
+![kuva](https://github.com/user-attachments/assets/eda55a4b-3430-46ec-b52a-70a7419e8dcb)
+
+Vastaus tulee kuitenkin vasta seuraavassa ketjussa, jossa metasploitable lähettää virhesanomia ja vastaa 'echo' pyyntöihin
+
+![kuva](https://github.com/user-attachments/assets/033e3ef9-053f-431b-97dd-c9dda12cb940)
+
+Katsoessani paketteja huomasin, että hyökkäyskone lähettää saman 'echo' komennon kaksi kertaa riveillä 26 ja 28. Vastaukseksi se saa kuitenkin rivillä 27 sekavaa mössöä ja rivillä 29 oikean echo vastauksen.
+Rivillä 32 lähetetty echo saa myös vastauksen.
+
+Muuta syytä echojen lähettelylle kuin yhteyden testaamisen tai isännän määrittämisen lisäksi en ymmärrä.
+
+![kuva](https://github.com/user-attachments/assets/45cfac49-1e4e-43f5-8430-bc99a24bfbdb)
+
+Katsoin Metasploitin ilmoituksia vielä kerran.
+Näin Wiresharkista, miten yhteys muodostettiin ja miten takaovi lähetettiin. Näin myös 'echo' komennot ja ilmeisesti kyseessä oli juurikin isännän valinta.
+Ymmärtääkseni siis tässä hyökkäyksessä ei ole sen monimutkaisemmasta haavoittuvuudesta kyse, kuin tahallisesti asennetusta takaovesta, joka mahdollistaa haitallisen koodin ajamisen käyttäjän tunnuksilla.
+
+Alla linkki dataan.
+
+https://file.io/XlnNTHe3XFkk
+
+# e) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # f) HTB
 
 ## Ennen aloittamista yhteyden varmistaminen
