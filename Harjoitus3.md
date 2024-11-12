@@ -89,7 +89,7 @@ Ymmärtääkseni siis tässä hyökkäyksessä ei ole sen monimutkaisemmasta haa
 
 Alla linkki dataan.
 
-https://file.io/XlnNTHe3XFkk
+https://easyupload.io/ng17si
 
 # e) 
 
