@@ -277,7 +277,7 @@ Löysin kansiosta tiedoston nimeltä prod.dtsConfig. Tässä vaiheessa tuli kuit
 
 ![kuva](https://github.com/user-attachments/assets/04f86a1f-18bb-400f-a2b2-37c13bd37d78)
 
-Tiedostosta löytyi selkokielinen salasana ja käyttäjä ilmeisesti sql_svc palveluun.
+Tiedostosta löytyi selkokielinen salasana ja käyttäjä ilmeisesti sql_svc palveluun. Salasana oli M3g4c0rp123.
 
 ![kuva](https://github.com/user-attachments/assets/3fc92fb2-4d36-4b23-868c-a75e021f3844)
 
@@ -324,6 +324,20 @@ Seuraavassa vaiheessa lataamme avatusta Kalin palvelimesta ohjelman, jolla voimm
 ![kuva](https://github.com/user-attachments/assets/93dc8b3b-b83b-4f10-9784-d5aa7519191f)
 
 Palvelin antoi vastauksen 200, eli tämä oletettavasti onnistui.
+
+*13.11.2024*
+
+Jatkoin tehtävää työpäivän jälkeen. Eilen tilanne törmäsi siihen, että en saanut tiedostoa ladattua. Ongelmana latauksessa oli, että haltuun saadun käyttäjän käyttöoikeudet eivät riittäneet, kun komento yritti ladata system32 kansioon.
+
+Tehtävää aloittaessani totesin, että kohdekoneen IP on uusiutunut. Koetin siis pääsenkö vielä ajamaan sillä xp_cmdshell komentoja.
+
+![kuva](https://github.com/user-attachments/assets/04ae1373-bdfb-472d-86a0-824fcf98bde7)
+
+Kone oli nollaantunut, sallin siis tämän uudelleen ja toimin aiemmin raportissa tekemieni ohjeiden mukaisesti, toki kohdekoneen IP-osoitteen muuttaen.
+
+
+
+
 
 
 
