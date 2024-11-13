@@ -1,5 +1,41 @@
 # Harjoitus 3 Nuuskija
 
+# Ympäristö:
+
+## Fyysinen ympäristö:
+- Intel i7-10700K @ 3,80GHz (AMD64)
+- Nvidia RTX 3080
+- 32 Gt RAM
+- Windows 11 Education 23H2
+
+## Virtuaaliympäristö (Kali)
+- Oracle VirtualBox 7.1.4
+- 8 Prosessoriydintä
+- 16 Gt RAM
+- Kali Linux 2024.3
+## Virtuaaliympäristö (Metasploitable)
+- Oracle VirtualBox 7.1.4
+- 1 Prosessoriydin
+- 2 Gt RAM
+- Metasploitable 2.0
+
+
+# x) Lue ja tiivistä
+
+## Wireshark tricks
+
+- Wireshark osaa näyttää esimerkiksi verkkokortin MAC osoitteen valmistajan.
+- Hakukentästä voi etsiä domaineja jos sen määrittää Column kohtaan
+- Wireshark kykenee TLS liikennettä, vaatien kuitenkin TLS avaimen
+
+## Fuzz URLs with ffuf
+
+- ffuf on verkkosivujen fuzzaamiseen sopiva työkalu
+- Sillä haetaan piilotettuja hakemistoja, jotka on unohdettu poistaa tai estää verkkosivuilta
+- Ohjelma yrittää sanalistan mukaisia sanoja sanan FUZZ tilalla
+- ffuf on erittäin tehokas tässä tarkoituksessa
+- Harjoituksessa haetaan ohjelmassa luodun palvelimen domaineista piilotettuja domaineja
+
 # a) Hyökkää
 
 Valitsin hyökkäykseksi edellesissä harjoituksessani tekemäni UnrealIRCd hyökkäyksen (https://github.com/panupeltola/tunkeutumistestaus/blob/main/Harjoitus2.md)
@@ -400,14 +436,18 @@ Yritin komentoa uudelleen ja tällä kertaa se jäi paikalleen.
 
 ![kuva](https://github.com/user-attachments/assets/8d9d4297-b3d6-455a-9a03-52ad30dad76f)
 
-Odotin 15 minuuttia ja mitään ei tapahtunut. En jaksanut odottaa enempää. En ollut järin innoissani tämän palvelun toimivuudesta ja olin tuhlannut suuren määrän tunteja vain saadakseni jotain toimimaan. En saanut yhteyttä tietokantaan, joten en pystynyt etenemään. Antiklimaattinen loppu.
+Odotin 15 minuuttia ja mitään ei tapahtunut. En jaksanut odottaa enempää. En ollut järin innoissani tämän palvelun toimivuudesta ja olin tuhlannut suuren määrän tunteja vain saadakseni jotain toimimaan. En saanut yhteyttä tietokantaan, joten en pystynyt etenemään. Antiklimaattinen loppu. Odotin vielä 40 minuuttia lisää, eikä mitään vieläkään tapahtunut. Komento oli suoraan ohjeesta.
 
 # Lähteet:
 
 1. T. Karvinen, 2023, Find Hidden Web Directories - Fuzz URLs with ffuf, https://terokarvinen.com/2023/fuzz-urls-find-hidden-directories/, luettu 12.11.2024
+   
 2. OpenWall, Re: CVE request: UnrealIRCd 3.2.8.1, https://www.openwall.com/lists/oss-security/2010/06/14/11, luettu 12.11.2024
+   
 3. 'man iptables' luettu 12.11.2024
+   
 4. ChatGPT, Prompt:"using linux kali and iptables how do I accept outbound networking only to network 10.10.10.0/24" luettu 10.11.2024
+   
 5. HackTheBox ohjeet Archetype, Mongod ja Explosion, luettu 12.11.2024 ja 13.11.2024
 
 
