@@ -160,6 +160,88 @@ Tällä löytyi hakemistot /admin, /admin/users ja /admin/users/96
 
 ![kuva](https://github.com/user-attachments/assets/e4139a2a-4e1c-4db0-8222-95c28dee0899)
 
+### Recursion
+
+Seuraavassa tehtävässä haetaan sanalista ja jokaisen sanan perään lisätään pääte ".log"
+Haku tehdään komennolla ffuf -w ~/wordlists/common.txt -e .log -u http://localhost/cd/ext/logs/FUZZ
+
+Hausta löytyi yksi osuma users.log
+
+![kuva](https://github.com/user-attachments/assets/b28ef593-bf4a-4fd2-8ba9-948266ac8d8c)
+
+### No 404 Status
+
+Seuraavassa tehtävässä tehtiin saman tapainen haku, kuin edellisviikon harjoituksessa, missä sivut joita ei ole olemassa eivät palauta 404 viestiä. Sen sijaan ne kaikki palauttavat saman pituisen viestin joka filtteröidään pois paketin pituuden perusteella.
+
+Ensimmäinen haku tehtiin komennolla 'ffuf -w ~/wordlists/common.txt -u http://localhost/cd/no404/FUZZ'
+
+Tästä näki, että suurin osa hauista palautti viestin, jonka pituus oli 669 tavua.
+
+Suodatin sen pituiset viestit pois komennolla 'ffuf -w ~/wordlists/common.txt -fs 669 -u http://localhost/cd/no404/FUZZ' 
+
+Vastaukseksi sain yhden hakemiston nimeltä secret
+
+![kuva](https://github.com/user-attachments/assets/9e71ec23-cb26-4da9-83cd-e15773ed3461)
+
+*Kuvassa näkyy hiukan aiempaa suodattamatonta hakua*
+
+### Param Mining
+
+Seuraavassa vaiheessa etsitään puuttuvaa tai puutteelista parametriä komennolla 'ffuf -w ~/wordlists/parameters.txt -u http://localhost/cd/param/data?FUZZ=1'
+
+Vastaukseksi tuli debug.
+
+![kuva](https://github.com/user-attachments/assets/9ad1ba1a-1a42-4ec0-bb87-ae10516a0fa3)
+
+### Rate Limited
+
+Seeuraavassa harjoituksessa hidastetaan haun tahtia, sillä liian useat haut johtavat tässä tapauksessa virheeseen. Tätä varten käytetään lippuja '-mc 200,429' joka rajasi vastaukset vain näihin HTTP vastauksiin. Toisessa vaiheessa käytettiin lippuja '-t 5' joka loi 5 samanaikaista versiota ja '-p 0.1' mikä rajoitti haut yhteen joka 0.1 sekuntia.
+
+Ensimmäinen komento oli 'ffuf -w ~/wordlists/common.txt -u http://localhost/cd/rate/FUZZ -mc 200,429'
+
+Se antoi kuitenkin hyvin pitkän listan 429 virheitä.
+
+Toisena komentona käytettiin 'ffuf -w ~/wordlists/common.txt -t 5 -p 0.1 -u http://localhost/cd/rate/FUZZ -mc 200,429' Tässä on nähtävillä ylempänä selitetyt liput.
+
+Tällä kertaa haku oli huomattavasti hitaampi johtuen rajoituksista.
+
+Hausta löytyi yksi hakemisto nimeltä oracle
+
+![kuva](https://github.com/user-attachments/assets/c92b0823-be53-4af3-bcf7-dcfb1b50fcc9)
+
+### Subdomains - Virtual Host Enumeration
+
+Harjoituksessa haettiin subdomaineja viemällä sana "FUZZ" subdomainin kohdalle.
+
+Enimmäisenä ajettiin komento 'ffuf -w ~/wordlists/subdomains.txt -H "Host: FUZZ.ffuf.me" -u http://localhost'
+
+Tämä antoi saman tyyppisen ongelman, kuin No 404 harjoitus. Lisäsin siis komentoon lipun -fs 1495.
+
+Komentona oli 'ffuf -w ~/wordlists/subdomains.txt -fs 1495 -H "Host: FUZZ.ffuf.me" -u http://localhost'
+
+Löysin yhden subdomainin nimeltä redhat.
+
+![kuva](https://github.com/user-attachments/assets/c7d5dc5b-2216-4e10-9698-d67af57cbfa0)
+
+*Kuvassa näkyy hiukan edellistä hakua, josta selviää tyhjien sivujen vastaus*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
