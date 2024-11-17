@@ -273,6 +273,44 @@ Vastaus löytyi nopeasti ja se oli chandler
 
 # f) msfvenom
 
+Selvitin ensin mikä msfvenom on. Löysin artikkelin aiheesta (https://www.offsec.com/metasploit-unleashed/msfvenom/)
+MsfVenom on payload ja encoder generaattori (anteeksi kamala kieli)
+Sillä voi yhdellä komennolla luoda payloadeja haluttuun kohteeseen ja muokata niitä haluamansa mukaisesti. Tämä mahdollistaa erittäin nopean payloadin luomisen todella laajoilla valmiilla kohdeympäristöillä. MsfVenomin sisään pystyy vielä kirjoittamaan lisää koodia. Se ei kuitenkaan itsessään toimi exploittina vaan se pitää saada jollain muulla tavalla ajettua kohdekoneessa.
+
+Käytin pohjana Teron vinkkinä ollutta komentoa ja muokkasin sen vastamaan omaa ympäristöäni.
+
+Katsoin vielä mitä eri liput komennossa tekevät:
+
+- 'p' Valitsee payloadin, tässä tapauksessa 64 bittiselle Linuxille sopiva meterpreter, joka käyttää reverse_tcp hyökkäystä
+- '-o' Määrittää uloskirjoitettavan tiedoston.
+- Muut määrittävät lähetyskoneen tiedot (Kali)
+
+Muut payloadit voi nähdä komennolla 'msfvenom -l payloads'
+
+![kuva](https://github.com/user-attachments/assets/fc8f82d7-a5e8-41f7-85db-3d1faaa16b80)
+
+Yllä kuvaus valitusta hyötykuormasta. Ajoin komennon ja katsoin 'cat' komennolla mitä olin luonut.
+
+![kuva](https://github.com/user-attachments/assets/b6ab6ff4-0280-4640-9fa3-addddaf6a98c)
+
+Näin binääriä.
+
+Seuraavaksi minun piti keksiä, miten saan tämän hyökkäyksen vietyä eteenpäin. Totesin, että oletettavasti helpoin on Metasploit consolen kautta siten, että valitsen payloadin exploitin yhteydessä.
+
+Katsoin missä muut saman tyyppiset payloadit ovat kansio rakenteessa ja yrtitin viedä tiedostoa niiden joukkoon. Todellisuudessa tämä payload sieltä varmasti jo löytyy, mutta itse tehtynä tulee parempaa. En ollut varma toimiiko tämä näin, mutta päätin yrittää. Siirsin luodun tiedoston komennolla 'sudo cp infected /usr/share/metasploit-framework/modules/payloads/singles/linux/x64/infected'.
+Käsittääkseni multi/handler ei itsessään tee mitään hyökkäystä vaan kuuntelee ja ottaa vain hyökkäyksen hallinnan. Tämä tarkoitti, että minun pitäisi saada siirrettyä tiedosto jotenkin kohde koneelle.
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
