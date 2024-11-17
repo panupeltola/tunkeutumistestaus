@@ -225,6 +225,45 @@ Löysin yhden subdomainin nimeltä redhat.
 
 *Kuvassa näkyy hiukan edellistä hakua, josta selviää tyhjien sivujen vastaus*
 
+# d) Tiedosto
+
+Päätin yrittää murtaa PDF tiedoston salausta. Loin aluksi suojaamattoman PDF tiedoston.
+
+![kuva](https://github.com/user-attachments/assets/955b51e0-50cd-4951-b364-bca186faba58)
+
+Googlailin miten Linuxilla voi suojata PDF tiedoston ja löysin työkalun pdftk artikkelista (https://www.baeldung.com/linux/file-pdf-set-password).
+
+Yritin luoda salasanasuojattua PDF tieodstoa komennolla 'pdftk /home/tohtori/Documents/output.pdf output /home/tohtori/Documents/salaisuudetturvassa.pdf user_pw jessica'
+
+Tämän pitäisi ottaa tiedosto output.pdf ja luoda siitä uusi versio salaisuudetturvassa.pdf ja lisätä sille salasana jessica.
+
+![kuva](https://github.com/user-attachments/assets/3aa05f68-b5f5-4a08-9f7b-12f0f1a41708)
+
+Tiedostoa avatessa kysyttiin salasanaa ja "jessica" avasi tiedoston.
+
+Seuraavaksi pitäisi saada salasanan hash otettua tiedostosta.
+Tein sen yrittämällä aiemmassa tehtävässä käytettyä tapaa ja ohjelmaa "zip2john"
+Menin kansioon, kirjoitin pdf ja painoin tabulatuuria. Sain kaksi tiedostoa pdf2john.py ja pdf2john.pl
+
+Yritin ensin komentoa ilman päätettä ja sain virheen. Sen jälkeen yritin python scriptiä, mutta sain tiivisteen sijaan virheen puuttuvasta paketista. Lopulta perl skripti sai minulle tiivisteen esiin.
+
+![kuva](https://github.com/user-attachments/assets/c1adf208-54dd-4a00-a0c0-0ea95bca5c29)
+
+Seuraavaksi yritin löytää salasanan tiivisteen komennolla '$HOME/john/john/run/john salaisuudetturvassa.pdf.hash'
+
+![kuva](https://github.com/user-attachments/assets/1293f041-e4f9-4174-bfe7-80d7d5285e69)
+
+Salasana löytyi nopeasti ja vastauksena oli "jessica". Tämä onnstui turhankin helposti.
+
+
+
+
+
+
+
+
+
+
 
 
 
