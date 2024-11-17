@@ -255,6 +255,25 @@ Seuraavaksi yritin löytää salasanan tiivisteen komennolla '$HOME/john/john/ru
 
 Salasana löytyi nopeasti ja vastauksena oli "jessica". Tämä onnstui turhankin helposti.
 
+# e) Tiiviste
+
+Generoin SHA1 esimerkkisalasanan. Tässä tapauksessa otin E689B9BED77A631D5DEAD51C500329E2A23046EB.
+
+Vaikka tiedän jo tämän Hash-moden ja tyypin yritän saada sen tässä vielä selville.
+
+Hain sen tyypin komennolla 'hashid -m E689B9BED77A631D5DEAD51C500329E2A23046EB'
+
+Sen tyypiksi ehdotettiin SHA1. Hashcat mode on 100.
+
+Rakensin siis komennon 'hashcat -m 100 E689B9BED77A631D5DEAD51C500329E2A23046EB /home/tohtori/hash/rockyou.txt'
+
+Vastaus löytyi nopeasti ja se oli chandler
+
+![kuva](https://github.com/user-attachments/assets/ef40bea0-09b1-456a-bdf0-c1446ada7036)
+
+# f) msfvenom
+
+
 
 
 
