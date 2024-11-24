@@ -271,6 +271,52 @@ Nyt ymmärrän syntaksin, miten nämä nested komennot toimivat. Eli hiukan kuin
 
 Tässä raktaisussa siis vain ajettiin komento, jossa pyydettiin palvelinta hakemaan tiedosto osoitteesta ../../../etc/passwd. Eli sama ratkaisu, kuin ensimmäisessä Path Traversal tehtävässä, mutta syntaksi oli eri suodattimen takia.
 
+## Insecure Direct Object Reference (IDOR)
+
+### Insecure direct object references
+
+Tehtävässä oli annettu vinkiksi, että järjestelmä tallentaa chat logit suoraan palvelimen tallennustilaan ja hakee ne käyttäen staattisia URL osoitteita.
+Tehtävän tavoitteena oli löytää käyttäjän carlos salasana ja kirjautua hänen käyttäjälleen.
+
+Avattuani sivut, ensimmäisenä huomioni kiinnitti "Live chat" nappi.
+
+Päätin seurata mitä sieltä löytyy, sillä tehtävänanto viittasi tähän kovasti.
+
+Lähetin sivulta viestin ja painoin "View transcript"
+
+Tämä latasi minulle uuden tiedoston.
+
+Halusin nähdä, miltä tämä näytti ZAPissa
+
+![kuva](https://github.com/user-attachments/assets/6127b7e5-0dda-48ed-89b9-69e710332477)
+
+Näin, että olin tehnyt GET pyynnön tiedostosta 2.txt.
+Mietin, miten tapahtuisi jos tekisinkin GET pyynnön 1.txt tiedostosta.
+
+![kuva](https://github.com/user-attachments/assets/d6058fb2-a975-42f4-82e7-f550f44f0ce0)
+
+Huomasin, että vastauskentässä oli uutta tekstiä. Etsin sieltä tietoa halutusta salasanasta.
+
+![kuva](https://github.com/user-attachments/assets/0616c490-d5f4-41a6-8bd2-d7900ea35db0)
+
+Sieltä löytyi.
+
+Seuraavaksi yritin käyttää salasanaa kirjautuakseni käyttäjän carlos tilille.
+
+![kuva](https://github.com/user-attachments/assets/c4e3d1b9-d3be-4b06-871e-c19872d63303)
+
+Olin sisällä.
+
+Harjoituksessa käytettiin huonosti toteutettuja staattisia linkkejä tietojen hakemiseen, joiden arvaaminen oli kovin helppoa ja tiedosto latautui ilman kirjautumista tai muuta vahvistusta vain näppäintä painamalla.
+
+
+
+
+
+
+
+
+
 
 
 
