@@ -490,6 +490,7 @@ Sieltä löysin komennon {{settings.SECRET_KEY}}
 ![kuva](https://github.com/user-attachments/assets/9dbd68b0-be39-4d60-a150-32a8e0282b63)
 
 Tämä näytti minulle salaisen avaimen.
+Kuvasta ei selvästi näy, mutta komento laitettiin <p> </p> kenttien väliin, jotka ylemmässä kuvassa näkyvät. Tämä tulosti avaimen preview nappia painettuani.
 
 Yritin tallentaa ikkunaa ja katsoa saanko siten labran valmiiksi.
 
