@@ -177,7 +177,7 @@ Käytin apuna PortSwiggerin ohjetta https://portswigger.net/web-security/file-pa
 
 Yritin kuitenkin mahdollisimman paljon tehdä itsenäisesti, kohdat joissa apua on pitänyt katsoa on merkattu erikseen.
 
-### File path traversal, simple case
+### File path traversal, simple case (https://portswigger.net/web-security/file-path-traversal/lab-simple)
 
 Aloitin ensimmäisenä tekemään Path traversal tehtäviä.
 Harjoituksen tavoitteena oli päästä käsiksi /etc/passwd tiedostoon.
@@ -224,7 +224,7 @@ Sain sivulta tiedon, että olin ratkaissut ongelman:
 
 ![kuva](https://github.com/user-attachments/assets/778a7d64-0b13-4023-9310-e60b72c06169)
 
-### File path traversal, traversal sequences blocked with absolute path bypass
+### File path traversal, traversal sequences blocked with absolute path bypass (https://portswigger.net/web-security/file-path-traversal/lab-absolute-path-bypass)
 
 Harjoituksen tavoitteena oli saada /etc/passwd tiedosto
 
@@ -248,7 +248,7 @@ Harjoituksen nimi antoi kyllä melkoisen vinkin.
 ![kuva](https://github.com/user-attachments/assets/68f01b7a-73cb-4d38-b907-b286906fe1f6)
 
 
-### File path traversal, traversal sequences stripped non-recursively
+### File path traversal, traversal sequences stripped non-recursively (https://portswigger.net/web-security/file-path-traversal/lab-sequences-stripped-non-recursively)
 
 Tehtävässä oli sama tavoite.
 
@@ -275,7 +275,7 @@ Tässä raktaisussa siis vain ajettiin komento, jossa pyydettiin palvelinta hake
 
 ## Insecure Direct Object Reference (IDOR)
 
-### Insecure direct object references
+### Insecure direct object references (https://portswigger.net/web-security/access-control/lab-insecure-direct-object-references)
 
 Tehtävässä oli annettu vinkiksi, että järjestelmä tallentaa chat logit suoraan palvelimen tallennustilaan ja hakee ne käyttäen staattisia URL osoitteita.
 Tehtävän tavoitteena oli löytää käyttäjän carlos salasana ja kirjautua hänen käyttäjälleen.
@@ -314,7 +314,7 @@ Harjoituksessa ei selvitetty miten käyttäjätunnus olisi selvinnyt. Oletettava
 
 ## Server Side Request Forgery (SSRF)
 
-### Basic SSRF against the local server
+### Basic SSRF against the local server (https://portswigger.net/web-security/ssrf/lab-basic-ssrf-against-localhost)
 
 Harjoituksessa on tarkoituksena muuttaa tarkastettu URL kohteeseen http://localhost/admin ja poistaa käyttäjä carlos.
 
@@ -352,7 +352,7 @@ Tehtävässä käytettiin suodattamatonta API kutsua, jolla saatiin lisätietona
 
 ## Cross Site Scripting (XSS)
 
-### Reflected XSS into HTML context with nothing encoded
+### Reflected XSS into HTML context with nothing encoded (https://portswigger.net/web-security/cross-site-scripting/reflected/lab-html-context-nothing-encoded)
 
 Käytin harjoituksen tukena artikkelia (https://portswigger.net/web-security/cross-site-scripting/reflected)
 
@@ -400,7 +400,7 @@ Harjoituksessa ajettiin suodattamatonta syötettä hakukentästä, joka mahdolli
 
 ![kuva](https://github.com/user-attachments/assets/a87fb98b-c364-4bbb-8cfa-1c1d43c37d57)
 
-## Stored XSS into HTML context with nothing encoded
+## Stored XSS into HTML context with nothing encoded (https://portswigger.net/web-security/cross-site-scripting/stored/lab-html-context-nothing-encoded)
 
 Harjoituksen tarkoituksena oli ajaa 'alert' komento käyttäen kommenttifunktionaalisuutta.
 
@@ -410,6 +410,7 @@ Muisitin edellisestä tehtävästä, että blogikirjoituksissa on kommenttikentt
 ![kuva](https://github.com/user-attachments/assets/4a127b0f-0c74-43f3-9f00-bc4d92b984be)
 
 Jätin kommentin ja samalla läpipääsymerkinnän ja hyväksymisen kommentista. En ollut itse kuitenkaan vielä nähnyt funktiota, joten palasin blogiin.
+Huomiona alla olevaan kuvaan, että kommentista piti poistaa verkko-osoite, jotta kommentin sai tallennettua.
 
 ![kuva](https://github.com/user-attachments/assets/c2f60757-6987-4adc-a02a-e4c9680d4a9f)
 
@@ -421,7 +422,7 @@ Harjoituksessa jätettiin kommentteihin JavaScript komento, joka ajettiin sivun 
 
 ## Server Side Template Injection (SSTI)
 
-### Server-side template injection with information disclosure via user-supplied objects
+### Server-side template injection with information disclosure via user-supplied objects (https://portswigger.net/web-security/server-side-template-injection/exploiting/lab-server-side-template-injection-with-information-disclosure-via-user-supplied-objects)
 
 Käytän harjoituksen tukena PortSwiggerin ohjetta (https://portswigger.net/web-security/server-side-template-injection)
 
@@ -436,7 +437,7 @@ Aloitan kirjautumalla sisään, koska epäilen hyökkäyksen liittyvän tähän.
 Sain POST pyynnön ja epäilen hyökkäyksen liittyvän tähän.
 
 Tässä vaiheessa kuitenkaan en keksi mitään ja käännyn ohjeen puoleen.
-Yritin ohjeen mukaisesti ajaa komentoa h'ttps://0a3000b20339a53180eecb2100c70030.web-security-academy.net/my-account?id=${7*7}'
+Yritin ohjeen mukaisesti ajaa osoitetta 'https://0a3000b20339a53180eecb2100c70030.web-security-academy.net/my-account?id=${7*7}'
 Tämä kuitenkin heitti minut takaisin kirjautumissivulle.
 
 ![kuva](https://github.com/user-attachments/assets/094bc4af-ce90-4c31-ad2d-e68d9ad4f962)
@@ -528,6 +529,8 @@ Tällä kertaa './pencode -h' näytti ohjeen.
 
 ![kuva](https://github.com/user-attachments/assets/5a898f03-6712-43d1-aa23-6848d5bf031f)
 
+## Käyttö
+
 Ajoin tekstin tiedostoon, mutta minulla oli vaikeuksia saada tekstiä luettua "input" kenttään. En keksinyt syntaksia.
 
 Keksin kierron lukemalla sen ensin 'cat' komennolla ja putkittamalla pencodelle.
@@ -546,5 +549,12 @@ Tehtävä suoritettu onnistuneesti.
 6. PortSwigger Academy, 2024, Server-side template injection, https://portswigger.net/web-security/server-side-template-injection
 7. PortSwigger Academy, 2024, Server-side request forgery (SSRF), https://portswigger.net/web-security/ssrf
 8. PortSwigger Academy, 2024, Cross-site scripting, https://portswigger.net/web-security/cross-site-scripting
-9.       
+9. PortSwigger Academy, 2024, Tehtävänannot (Linkki tehtävän vieressä)
+10. Kadalon Security & Intelligence, 2021, Using Nested Traversal Sequences to Bypass File Path Traversal Defense, https://kadalonsecurity.medium.com/using-nested-traversal-sequences-to-bypass-file-path-traversal-defense-3982feb4e60b
+11. W3schools, Window alert(), https://www.w3schools.com/jsreF/met_win_alert.asp
+12. Seven Seas Security, SSTI Complete Lab Breakdown: SSTI w/ info disclosure via user-supplied objects, https://www.youtube.com/watch?v=8o5QPU-BvFQ
+13. GitHub davdts, 2021, Django App Vulnerable to Django Templates SSTI, https://github.com/Lifars/davdts
+14. B. Demir, 2020, A Pentester’s Guide to Server Side Template Injection (SSTI), https://medium.com/@bdemir/a-pentesters-guide-to-server-side-template-injection-ssti-c5e3998eae68
+15. GitHub joohoi, 2024, pencode, https://github.com/ffuf/pencode
+16. Google, 2024, Go, https://go.dev/            
 
