@@ -65,3 +65,15 @@
 - Helpoin tapa estää on erottaa logiikka syötteestä
 
 ### Server-side request forgery (SSRF) (https://portswigger.net/web-security/ssrf)
+
+- Hyökkäyksessä voidaan ajaa komentoja odottamattomissa sijainneissa palvelimella
+- Esimerkissä pyydetään sovelluksena tietoa palvelimelta ja se palautetaan käyttäjälle virheellisesti
+- Helpoin tapa puolustauta on suodattaa ja suojata käyttäjän komennot
+
+### Cross-site scripting (https://portswigger.net/web-security/cross-site-scripting)
+
+- Lähetetään haitallista JavaScript koodia muille käyttäjille
+- Yksi hyökkäyksen tapa on lähettää koodi HTTP pyynnön muodossa
+- Toinen tapa on syöttää haittakoodia esimerkiksi viestin tai käyttäjänimen muodossa, joka ajetaan muille käyttäjille heidän avatessaan sivun
+- Kolmas hyökkäys on tilanne, jossa hyökkääjä saa haltuunsa täytettävän kentän.
+- Helpoin tapa estää on suojata käyttäjän syöte
