@@ -1,5 +1,7 @@
 # Harjoitus 5 Täysin Laillinen Sertifikaatti
 
+Harjoitukset osana T. Karvisen kurssia Tunkeutumistestaus (https://terokarvinen.com/tunkeutumistestaus/)
+
 # Ympäristö
 
 ## Fyysinen ympäristö:
@@ -458,7 +460,7 @@ Ne hakevat tietoa, joten oletan voivani muokata näitä. Yritän PortSwiggerin o
 
 ![kuva](https://github.com/user-attachments/assets/0ad76d27-9cad-4132-9fb2-cfd48f902b4f)
 
-En saanut tätä toimimaan, mutta ainakin näen nyt, että kyseessä on Django framework.
+En saanut tätä toimimaan, mutta ainakin näen nyt, että kyseessä on Django framework virheilmoituksesta.
 
 ![kuva](https://github.com/user-attachments/assets/81689433-9e6a-4674-9429-2fc5fb5edf81)
 
@@ -499,26 +501,40 @@ Tehtävä oli valmis.
 Käytin tehtävässä videota lopulta apuna oikeastaan vain muokkauskentän löytämiseen. En sitä itse olisi varmaan hetkeen löytänyt.
 Harjoituksessa käytettiin Django frameworkin valmiita komentoja näyttämään salainen avain.
 
+# pencode
 
+## Asennus
 
+Avasin annetun GitHub linkin ja siinä annettiin ohjeeksi käyttää Go asennusohjelmaa. (https://github.com/ffuf/pencode)
 
+![kuva](https://github.com/user-attachments/assets/2b01fb86-bc27-421c-afda-01907f47b3e6)
 
+Sain virheen ja päätin asentaa molemmat ehdotetut paketit. Tutkin mikä Go on ja ilmeisesti se on Googlen kehittämä ohjelmointikieli (https://go.dev/).
 
+Asensin paketit komennolla 'sudo apt-get -y install gccgo-go golang-go'
+Tämä antoi vain virheen, joten asensin ne omina paketteinaan.
 
+![kuva](https://github.com/user-attachments/assets/aeee5c86-db61-47f1-9e31-148176fa55df)
 
+Tällä kertaa asennus onnistui.
 
+En silti löydä tiedostoa.
 
+Koetin vielä Teron ohjeessa olevaa tapaa ladata tervapallo.
 
+Käytin komentoja 'wget https://github.com/ffuf/pencode/releases/download/v0.4/pencode_0.4_linux_amd64.tar.gz' ja 'tar xf pencode_0.4_linux_amd64.tar.gz'
 
+Tällä kertaa './pencode -h' näytti ohjeen.
 
+![kuva](https://github.com/user-attachments/assets/5a898f03-6712-43d1-aa23-6848d5bf031f)
 
+Ajoin tekstin tiedostoon, mutta minulla oli vaikeuksia saada tekstiä luettua "input" kenttään. En keksinyt syntaksia.
 
+Keksin kierron lukemalla sen ensin 'cat' komennolla ja putkittamalla pencodelle.
 
+![kuva](https://github.com/user-attachments/assets/57ff0cfc-3534-48dc-a2bd-6513ce4bb2e7)
 
+Tehtävä suoritettu onnistuneesti.
 
-
-
-
-
-
+# Lähteet
 
