@@ -538,3 +538,13 @@ Tehtävä suoritettu onnistuneesti.
 
 # Lähteet
 
+1. T. Karvinen, 2024, Tunkeutumistestaus, https://terokarvinen.com/tunkeutumistestaus/, Luettu 24.11.2024
+2. OWASP, 2021, A01:2021 – Broken Access Control, https://owasp.org/Top10/A01_2021-Broken_Access_Control/, Luettu 24.11.2024
+3. OWASP, 2021, A10:2021 – Server-Side Request Forgery (SSRF), https://owasp.org/Top10/A10_2021-Server-Side_Request_Forgery_(SSRF)/, Luettu 24.11.2024
+4. PortSwigger Academy, 2024, Insecure direct object references (IDOR), https://portswigger.net/web-security/access-control/idor,
+5. PortSwigger Academy, 2024, Path traversal, https://portswigger.net/web-security/file-path-traversal,
+6. PortSwigger Academy, 2024, Server-side template injection, https://portswigger.net/web-security/server-side-template-injection
+7. PortSwigger Academy, 2024, Server-side request forgery (SSRF), https://portswigger.net/web-security/ssrf
+8. PortSwigger Academy, 2024, Cross-site scripting, https://portswigger.net/web-security/cross-site-scripting
+9.       
+
