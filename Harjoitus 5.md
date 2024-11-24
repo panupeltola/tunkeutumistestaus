@@ -348,64 +348,156 @@ Carlos oli totisesti poissa.
 
 Tehtävässä käytettiin suodattamatonta API kutsua, jolla saatiin lisätietona ensin lisää komentoja ja niitä käyttämällä saatiin poistettua käyttäjä carlos ilman tunnistautumista tai salasanaa.
 
+## Cross Site Scripting (XSS)
 
+### Reflected XSS into HTML context with nothing encoded
 
+Käytin harjoituksen tukena artikkelia (https://portswigger.net/web-security/cross-site-scripting/reflected)
 
+Harjoituksen tehtävänä on ajaa 'alert' funktio käyttäen cross-site scriptingiä.
 
+Ensimmäisenä haluan nähdä miten tämä funktio sivulla normaalisti ajetaan.
 
+Sivulla oli etusivulla hakukenttä.
 
+![kuva](https://github.com/user-attachments/assets/aa7dee20-4afe-449b-a038-1ad46cafd32d)
 
+En kuitenkaan saanut siinä virhettä aiheutettua ja haku toimi vaikkei kirjaimet olisi oikein.
 
+![kuva](https://github.com/user-attachments/assets/63dda501-439f-41d6-880c-b87c55cee0f1)
 
+Yritin seuraavaksi katsoa blogikirjoituksen sisään.
 
+Siellä oli kommenttikenttä.
 
+Yritin kirjoittaa kommenttia.
 
+![kuva](https://github.com/user-attachments/assets/ab1b4588-0648-4503-b1c2-8a86c438f870)
 
+Tässä sain virheitä väärin formatoidusta tekstistä, mutta se ei näkynyt ZAPissa
 
+En saanut kommenttia kirjoitettua.
 
+Tässä vaiheessa alkoi oma osaaminen loppua kesken.
 
+![kuva](https://github.com/user-attachments/assets/1b167de4-01a7-43a9-a52c-4d0578ce3bd3)
 
+Katsoin vielä hakutoimintoa, koska se oli ainut tapa, että olin saanut syötettä vietyä eteenpäin.
 
+Yritin tutkia onko tehtävänannossa annettu alert komento jokin yleinen JavaScript komento, sillä se ei ole itselleni tuttu.
 
+Selvisi, että se on (https://www.w3schools.com/jsreF/met_win_alert.asp)
 
+Yritin siis sisällyttää tätä hakukenttään PortSwiggerin ohjeen mukaisesi '<script> alert("Apua !") </script>'
 
+Kirjoitin komennon hakukenttään ja sain virheikkunan ponnahtamaan
 
+![kuva](https://github.com/user-attachments/assets/488271e2-0bff-4ea3-b91d-0f82b37f5288)
 
+Harjoituksessa ajettiin suodattamatonta syötettä hakukentästä, joka mahdollisti JavaScript komentojen ajamisen.
 
+![kuva](https://github.com/user-attachments/assets/a87fb98b-c364-4bbb-8cfa-1c1d43c37d57)
 
+## Stored XSS into HTML context with nothing encoded
 
+Harjoituksen tarkoituksena oli ajaa 'alert' komento käyttäen kommenttifunktionaalisuutta.
 
+Sivu näytti samalta, kuin aiemmin tosin ilman hakukenttää.
+Muisitin edellisestä tehtävästä, että blogikirjoituksissa on kommenttikenttä, joten päätin yrittää saada kommentin sinne.
 
+![kuva](https://github.com/user-attachments/assets/4a127b0f-0c74-43f3-9f00-bc4d92b984be)
 
+Jätin kommentin ja samalla läpipääsymerkinnän ja hyväksymisen kommentista. En ollut itse kuitenkaan vielä nähnyt funktiota, joten palasin blogiin.
 
+![kuva](https://github.com/user-attachments/assets/c2f60757-6987-4adc-a02a-e4c9680d4a9f)
 
+Blogin avatessa sain funktion toimimaan.
 
+![kuva](https://github.com/user-attachments/assets/d66cc819-15b4-413b-bb7c-ac3c8e267e45)
 
+Harjoituksessa jätettiin kommentteihin JavaScript komento, joka ajettiin sivun lataamisen yhteydessä.
 
+## Server Side Template Injection (SSTI)
 
+### Server-side template injection with information disclosure via user-supplied objects
 
+Käytän harjoituksen tukena PortSwiggerin ohjetta (https://portswigger.net/web-security/server-side-template-injection)
 
+Harjoituksen tarkoituksena on varastaa frameworkin salainen avain.
 
+Harjoituksen mukana on annettu kirjautumistiedot.
 
+Aloitan kirjautumalla sisään, koska epäilen hyökkäyksen liittyvän tähän.
 
+![kuva](https://github.com/user-attachments/assets/2b1ee8f2-6ae8-4991-a4bb-8cc5a7b4581f)
 
+Sain POST pyynnön ja epäilen hyökkäyksen liittyvän tähän.
 
+Tässä vaiheessa kuitenkaan en keksi mitään ja käännyn ohjeen puoleen.
+Yritin ohjeen mukaisesti ajaa komentoa h'ttps://0a3000b20339a53180eecb2100c70030.web-security-academy.net/my-account?id=${7*7}'
+Tämä kuitenkin heitti minut takaisin kirjautumissivulle.
 
+![kuva](https://github.com/user-attachments/assets/094bc4af-ce90-4c31-ad2d-e68d9ad4f962)
 
+Komennot eivät toimineet myöskään productID osiossa.
 
+Olin jumissa.
 
+Community solutionsissa on usein videoita, joten päätin katsoa videota (https://www.youtube.com/watch?v=8o5QPU-BvFQ) ainakin siihen asti, että ymmärtäisin miten hyökkäys kohdetta voisi edes tutkia.
 
+Videossa näytettiin, että sisäänkirjautumisen jälkeen esineille on tullut uusi osio "Edit template"
+Jätin videon sikseen tältä erää ja yritin ratkaista ongelmaa.
 
+![kuva](https://github.com/user-attachments/assets/2ea5f24c-0720-47bb-ab12-90f54392e61c)
 
+Tässä silmääni pisti lopussa olevat kentät.
 
+![kuva](https://github.com/user-attachments/assets/0c0a51bd-da2f-4c5b-a496-12efad513648)
 
+Ne hakevat tietoa, joten oletan voivani muokata näitä. Yritän PortSwiggerin ohjetta 7*7
 
+![kuva](https://github.com/user-attachments/assets/0ad76d27-9cad-4132-9fb2-cfd48f902b4f)
 
+En saanut tätä toimimaan, mutta ainakin näen nyt, että kyseessä on Django framework.
 
+![kuva](https://github.com/user-attachments/assets/81689433-9e6a-4674-9429-2fc5fb5edf81)
 
+Yritin muokata kutsuun ensimmäiseen kenttään toisen kerran product.price. Tämä muutti tiedon myös preview ikkunaan. Nyt minun pitäisi vain keksiä mikä oikea arvo on.
+En keksinyt taas ratkaisua vaikka yritin googlata tapoja löytää avaimia, käyttäjätunnuksia ja salasanoja. Näistä mikään ei toiminut. Tiesin tarvitsevani käytännössä yhden komennon.
 
+Olin löytänyt jo frameworkin, joten päätin vielä yrittää hakea googlesta "Django SSTI"
 
+Sain ensimmäisenä GitHub linkin aiheesta (https://github.com/Lifars/davdts)
 
+Sieltä löysin, että kentän {{ messages.storages.0.signer.key }} tulisi näyttää avain.
+
+Se ei näyttänyt mitään.
+
+Seuraavaksi yritin sivun näyttämää komentoa '{% load log %}{% get_admin_log 10 as log %}{% for e in log %} {{e.user.get_username}} : {{e.user.password}}{% endfor %}' Tämän tulisi näyttää admin käyttäjän tunnus ja salasana.
+
+![kuva](https://github.com/user-attachments/assets/96377e81-8fbb-4bf7-955d-210ee52b92b2)
+
+Sain error viestin, mutta tämä komento ilmeisesti vaatii jonkin tietyn lokin olemassaolon.
+
+Tässä vaiheessa tajusin, että minulla oli tuossa avain komennossa jäänyt kokonaan HTML koodaus pois, joten ihmekkään jos ei mitään tulostunut. Ei toiminut tämäkään.
+
+Yritin toista sivua. (https://medium.com/@bdemir/a-pentesters-guide-to-server-side-template-injection-ssti-c5e3998eae68)
+Sieltä löysin komennon {{settings.SECRET_KEY}}
+
+![kuva](https://github.com/user-attachments/assets/9dbd68b0-be39-4d60-a150-32a8e0282b63)
+
+Tämä näytti minulle salaisen avaimen.
+
+Yritin tallentaa ikkunaa ja katsoa saanko siten labran valmiiksi.
+
+Lisäsin löydetyn avaimen "Submit solution" kenttään.
+
+![kuva](https://github.com/user-attachments/assets/c36fa266-9c5c-42fc-9b11-b6da55db2224)
+
+Tehtävä oli valmis.
+
+Käytin tehtävässä videota lopulta apuna oikeastaan vain muokkauskentän löytämiseen. En sitä itse olisi varmaan hetkeen löytänyt.
+Harjoituksessa käytettiin Django frameworkin valmiita komentoja näyttämään salainen avain.
 
 
 
