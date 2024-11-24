@@ -308,6 +308,58 @@ Seuraavaksi yritin käyttää salasanaa kirjautuakseni käyttäjän carlos tilil
 Olin sisällä.
 
 Harjoituksessa käytettiin huonosti toteutettuja staattisia linkkejä tietojen hakemiseen, joiden arvaaminen oli kovin helppoa ja tiedosto latautui ilman kirjautumista tai muuta vahvistusta vain näppäintä painamalla.
+Harjoituksessa ei selvitetty miten käyttäjätunnus olisi selvinnyt. Oletettavasti vain arvaamalla tai tietämällä etukäteen.
+
+## Server Side Request Forgery (SSRF)
+
+### Basic SSRF against the local server
+
+Harjoituksessa on tarkoituksena muuttaa tarkastettu URL kohteeseen http://localhost/admin ja poistaa käyttäjä carlos.
+
+Aloitan avaamalla eri sivuja nähdäkseni saisinko niistä jotain apua, avaan osoitteen "My account" ja yhden tuotesivun
+
+![kuva](https://github.com/user-attachments/assets/a824276d-0137-4ef6-8a5b-c1b9f3cf3817)
+
+My account sisältää kirjautumisruudun
+
+![kuva](https://github.com/user-attachments/assets/bfa0c31c-1cb9-4c3f-844a-e2967f787794)
+
+Tuotesivu sisältää saatavuuden tarkistuksen. Klikkaan tätä, koska aiemmin luettuna opin, että SSRF tehdään usein POST pyyntöjen yhteydessä.
+
+![kuva](https://github.com/user-attachments/assets/256f68ad-c2e7-413a-9917-2716e4324a93)
+
+Totisesti näen API pyynnön. Yritän tehtävänannon ohjeen mukaisesti muokatata tähän http://localhost/admin
+
+Sain vastauksena uuden sivun Response kenttään. Kelasin sen läpi ja näin tekstiä, jonka oletin olevan API kutsu käyttäjän 'carlos' poistamiselle
+
+![kuva](https://github.com/user-attachments/assets/f0904630-b3f4-41a2-96a0-745f9dad04f8)
+
+Ajoin komennon.
+
+![kuva](https://github.com/user-attachments/assets/b140540e-5afb-468a-9ba5-fb284646f292)
+
+Ajaessani API kutsun 'stockApi=http://localhost/admin/' uudelleen, näin alla kuvassa olevan tekstin, eikä käyttäjää carlos enää näkynyt.
+
+![kuva](https://github.com/user-attachments/assets/f0399f5b-874e-4ca8-acaa-d7a54c62ff7a)
+
+Carlos oli totisesti poissa.
+
+![kuva](https://github.com/user-attachments/assets/cbcb7974-a990-4c6e-834e-2e52f904c631)
+
+Tehtävässä käytettiin suodattamatonta API kutsua, jolla saatiin lisätietona ensin lisää komentoja ja niitä käyttämällä saatiin poistettua käyttäjä carlos ilman tunnistautumista tai salasanaa.
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
