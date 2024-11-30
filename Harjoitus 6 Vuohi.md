@@ -277,6 +277,126 @@ Nyt oli tehtävä ratkaistu.
 
 ## Missing Function Level Access Control
 
+Aloitin kliksuttelemalla kaikki näppäimet läpi, mutta ZAPiin ei tullut mitään järkevää.
+
+Yritin tämän jälkeen käyttää Inspect ominaisuutta selaimessa ja löysin riittävän pitkälle mentyäni valikon, jota ei näkynyt graaffisessa käyttöliittymässä.
+
+![kuva](https://github.com/user-attachments/assets/dd97313d-fd67-470e-863e-bd35e5a05837)
+
+Sen sisältä löytyi kohta Admin ja adminvalikosta vaikka mitä herkkuja
+
+![kuva](https://github.com/user-attachments/assets/73be49bb-f5f3-4767-9910-de2ddb6509a9)
+
+### Try it
+
+Seuraavassa kohdassa piti löytää hash arvo.
+
+Aloitin klikkaamaal submit ja näkemällä mistä osoitteesta viestit tulevat.
+
+Päätin yrittää kirjata äsken löytämiäni arvoja tähän polkuun.
+
+![kuva](https://github.com/user-attachments/assets/cf10dad4-c88c-4139-9df2-2a6a659428e6)
+
+*Users*
+
+![kuva](https://github.com/user-attachments/assets/c740164d-687a-427b-b069-800b5fae1652)
+
+*Config*
+Näistä vain users antoi järkevän ratkaisun ja sekin antoi virheen 415 "Unsupported Media Type"
+
+Luin Mozillan [dokumentaatiota](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/415) aiheesta ja siellä huomautettiin, että vastaus ilmoittaa oikean tyyppisen viestin.
+
+Tässä tapauksessa Responde headerissa oli Accept: application/json
+
+Yritin siis muuttaa kenttääni "Content Type" kohtaan tämän arvon.
+
+![kuva](https://github.com/user-attachments/assets/08378937-1cf4-4cb1-992a-389c20f011e0)
+
+Tällä kertaa sain eri vastauksen
+
+![kuva](https://github.com/user-attachments/assets/4ea0dd9e-2880-4ff2-85bd-2ec10457d7e5)
+
+Aloin myös miettiä, mitä hyötyä minulla on lähettää POST pyyntöjä.
+Yritin muottaa tätä GET muotoon.
+
+Nyt sain ison kasan käyttäjiltä tietoa mukaan lukien hash arvot.
+
+![kuva](https://github.com/user-attachments/assets/d9a151a0-1b46-4d7e-a326-ba0124653d29)
+
+Kohta oli ratkaistu.
+
+### 3
+
+Viimeiseksi piti vielä tehdä sama uudelleen sen jälkeen kun ylläpitäjät olivat parantaneet turvallisuutta.
+Aloitin klikkaamalla "Submit"
+
+Sain tismalleen samalla komennolla kaikki tiedot ulos.
+
+![kuva](https://github.com/user-attachments/assets/a5e4c406-7517-413d-9c4e-7ced570acc5e)
+
+Ilmeisesti tämä oli kuitenkin väärin.
+
+Yritin toista löytämääni piilotettua kansiota, mikäli /users-admin-fix/users näyttäisi oikeat tiedot.
+
+![kuva](https://github.com/user-attachments/assets/00fda489-b26f-49a9-8b01-b25ca64a24d2)
+
+Uskoin osuneeni lähelle. Ongelma oli, että minun pitäisi olla Admin tämän haun tehdäkseni.
+
+Päätin yrittää voinko vain päivittää itsestäni ylläpitäjän. Tässä vaiheessa jäin hiukan jumiin ja katsoin WebGoatin vinkkejä.
+
+Näissä ohjeistettiin luomaan uusi käyttäjä POST komennolla. Minulla ei ollut yhtään käyttäjää tiedossa, joten uuden luominen olisi helpoin, jos tätä ei ole estetty.
+
+![kuva](https://github.com/user-attachments/assets/543ce066-4ca6-40b0-82da-619db6ea69fe)
+
+Uuden käyttäjän luonti onnistui.
+
+![kuva](https://github.com/user-attachments/assets/ca9ae21e-d5dd-49fa-9dd2-b89918eb9a36)
+
+Koetetaan PUT komentoa tehdä kaikista admineita. Tämä ei toiminut. Eli nyt minun pitäisi keksiä, miten pääsen toisella käyttäjällä käsiksi haluttuihin materiaaleihin. 
+
+Hyvin pitkän tutkimisen, tuskailun yrittämisen ja muun kikkailun jälkeen löysin ratkaisun.
+
+Käyttäjä piti luoda samaksi kuin oma WebGoat käyttäjä. Tähän oli erittäin huonosti ohjetta, eivätkä vinkit suoranaisesti auttaneet.
+
+Piilotetun sivun /users-admin-fix löysin samasta piilosta, kuin users ja config sivut "Inspect" ominaisuudella.
+
+Eli ratkaisuna oli lisätä käyttäjä passeli salasanalla jihuu ja arvolla admin: true.
+
+![kuva](https://github.com/user-attachments/assets/64bc00de-d369-4241-a646-cb0b7f56c1d9)
+
+Tämän jälkeen sivu latasi oikein.
+
+Sain hashin Jerrylle: d4T2ahJN4fWP83s9JdLISio7Auh4mWhFT1Q38S6OewM= Tämä ei kuitenkaan jostain syystä kelvannut vastaukseksi.
+Omasta mielestäni olen nyt tämän tehtävän ratkaissut, vaikka vastaus ei kelvannut WebGoatille.
+
+Hash ei ole sama kuin aiemmassa ratkaisussa ja sen hakemiseen tuli avata uusi linja käyttäjälle ja korottaa oikeudet missä onnistuin. En jaksa selvittää epäselvän tehtävänannon/vastauksen syntaksin toimimattomuutta pidempään.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
