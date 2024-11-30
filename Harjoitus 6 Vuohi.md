@@ -287,7 +287,7 @@ Sen sisältä löytyi kohta Admin ja adminvalikosta vaikka mitä herkkuja
 
 ![kuva](https://github.com/user-attachments/assets/73be49bb-f5f3-4767-9910-de2ddb6509a9)
 
-### Try it
+### 2 Try it
 
 Seuraavassa kohdassa piti löytää hash arvo.
 
@@ -366,10 +366,136 @@ Eli ratkaisuna oli lisätä käyttäjä passeli salasanalla jihuu ja arvolla adm
 
 Tämän jälkeen sivu latasi oikein.
 
+![kuva](https://github.com/user-attachments/assets/32b7a85f-49ed-4b41-85c8-3c45d7729b32)
+
+
 Sain hashin Jerrylle: d4T2ahJN4fWP83s9JdLISio7Auh4mWhFT1Q38S6OewM= Tämä ei kuitenkaan jostain syystä kelvannut vastaukseksi.
 Omasta mielestäni olen nyt tämän tehtävän ratkaissut, vaikka vastaus ei kelvannut WebGoatille.
 
 Hash ei ole sama kuin aiemmassa ratkaisussa ja sen hakemiseen tuli avata uusi linja käyttäjälle ja korottaa oikeudet missä onnistuin. En jaksa selvittää epäselvän tehtävänannon/vastauksen syntaksin toimimattomuutta pidempään.
+
+Käynnistin WebGoatin uudelleen ja tällä kertaa vastaus kelpasi.
+
+![kuva](https://github.com/user-attachments/assets/75aced3b-9ef4-4db5-b994-1de4f7534f77)
+
+Tätä ei näköjään olisi tehtävänannon mukaan tarvinnut tehdä, mutta tein silti.
+
+# c) Identity & Auth Failure
+
+## Authentication Bypasses
+
+Tehtävänä on ohittaa turvakysymykset salasanan nollaamisen yhteydessä.
+
+Vinkeiksi annetaan piitotetut tiedot, parametrien poistaminen ja puhdas arvaaminen.
+
+![kuva](https://github.com/user-attachments/assets/75d31f89-8c48-4511-a923-270b332ea8ce) 
+
+Näen POST pyynnöstä tärkeinä tietoina, että minulta odotetaan vastausta kahteen kysymykseen ja minulle näytetään userId.
+
+Katson ensin onko sivulla vinkin mukaan jotain piilotettua tietoa. 
+
+![kuva](https://github.com/user-attachments/assets/77056156-e945-4637-b520-3db57c3a0fcd)
+
+Piilosta löytyi erillinen change-password-form.
+
+En keksinyt tapaa päästä siihen käsiksi ja lisäksi itselleni iski silmään suurempi herkku "verifyMethod"
+
+Entä jos se vain sattumalta katoiaisi?
+
+![kuva](https://github.com/user-attachments/assets/169ad857-aff6-4d4c-b145-bcef821f1434)
+
+Tämä ei toiminut, yritin seuraavaksi poistaa kysymysten numerot.
+
+Tämäkään ei toiminut
+
+Lopulta ratkaisuksi toimi kun vain vaihdoin kysymykset eri nimisiksi, jolloin palvelin tarkasti "vääriin" kysymyksiin vastauksia.
+
+![kuva](https://github.com/user-attachments/assets/ccb659c7-2dc5-4355-af0a-0ae18a452544)
+
+## Insecure Login
+
+Tehtävässä on tarkoituksena haistella herkkää dataa ja käyttää sitä suojaamattoman kirjautumisen murtamiseen.
+
+Aloitin kirjoittamalla käyttäjän ja salasanan.
+Tämän jälkeen klikkasin Log in nappia
+
+Näin paketeista, että olin saanut paketin kaapattua, muoto oli jollain tavalla suojattu ja minun tulisi se murtaa. Kaikki tiedot olivat listassa.
+
+![kuva](https://github.com/user-attachments/assets/ccda8487-644d-442f-8011-2c95d5b29f3b)
+
+Löysin tämän olevan suojattua JavaScriptiä googletettuani koko pötkön ja löysin sille kätevän [kääntäjän](https://lelinhtinh.github.io/de4js/) 
+
+Kuvassa oli listattu käyttäjänimi kohtaan 0 ja salasana kohtaan 1. Pythonissa listan esineet erotetaan pilkulla.
+
+![kuva](https://github.com/user-attachments/assets/42fbe08f-d35c-4e6b-8927-9b52c49fbdd0)
+
+*Käyttäjä*
+
+![kuva](https://github.com/user-attachments/assets/280cf5df-ba8f-47b3-803e-571a89c25c00)
+
+*Salasana*
+
+Nämä ratkaisivat tehtvävän.
+
+![kuva](https://github.com/user-attachments/assets/53f001ec-0d35-4acf-9342-fbd9448a36cb)
+
+# d) Server-side Request Forgery
+
+## Find and modify the request to display Jerry
+
+Klikkasin ensimmäisenä näppäintä Steal the Cheese.
+
+![kuva](https://github.com/user-attachments/assets/bd424c19-8e95-4049-b918-4d40cf8ca9f1)
+
+Epäonnistuminen jälleen.
+
+Lopulta ratkaisu oli niinkin yksinkertainen kuin kuvan nimen vaihtaminen tom.png --> jerry.png.
+
+Mutta harjoitus ratkaistu. Ylipäätään huomiona, että harjoituksissa on ollut isolta osin erittäin huonot ohjeistukset ja paljon aikaa on mennyt ihan vaan arvailuun mitä halutaan.
+
+## Change the request, so the server gets information from http://ifconfig.pro
+
+Harjoituksessa piti vaihtaa tietolähde.
+
+Painoin nappia ja menin ZAProxyyn katsomaan miltä tämä siellä näyttää.
+
+Siellä oli POST pyynnössä kohta URL. Kirjoitin siihen halutun URL osoitteen.
+
+Tehtävä ratkaistu.
+
+![kuva](https://github.com/user-attachments/assets/82e2befc-79c9-49e3-a5c8-b043d2a933a0)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
