@@ -508,145 +508,36 @@ Jonkin aikaa törmäsin taas samaan ongelmaan, että vaikka kentät oli muutettu
 
 Sain kuitenkin ongelman lopulta ratkaistua kun lisäsin riittävästi kamaa.
 
+# f) Editmenu
 
+Aloitin asentamalla microon luennolla opitulla komennolla lisäosan palettero 'micro --plugin install palettero'
 
+Muistin myös, että jotta editmenu toimii kunnolla tulee olla asennettu fuzzy finder paketti. Asensin sen komennolla 'sudo apt-get -y install fzf'
 
+Loin yksinkertaisen funktion, mutta sinne jäi kommentilla lisätty debug ominaisuus.
+Halusin luoda toiminnon, paletteroon, joka poistaa kaikki rivit, joilla tämä kommentti on.
 
+Painoin CTRL+e ja kirjoitin auenneeseen promptiin "editmenu".
+Muistin luennolla tekemästäni harjoituksesta, että komennon alkuun piti lisätä textfilter ja sen perään pystyi lisäämään omia komentoja.
 
+![kuva](https://github.com/user-attachments/assets/bf99608f-376a-441f-8e96-d64ad85ef6bc)
 
+Ensimmäinen yritys.
 
+Tämä ei toiminut, ilmeisesti kommenttimerkki hämäsi tässäkin yhteydessä.
+Yritin myös tapoja '#debug' ja '\#debug' nämä eivät kuitenkaan toimineet, sillä kaikki muuttuivat kommenteiksi.
 
+Päätin lisätä siis hyödyllisen ominaisuuden, joka poistaa kaikki rivit, joilla on sana print.
 
+![kuva](https://github.com/user-attachments/assets/4f333ba4-dd58-44ae-b4bd-2e76cb4653a6)
 
+Ennen ajoa:
 
+![kuva](https://github.com/user-attachments/assets/eb6d0dc3-76b2-4a5b-ba12-c90c206fd8b0)
 
+Ajon jälkeen:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+![kuva](https://github.com/user-attachments/assets/1c815519-80fd-4f7b-a98c-94ab613a0bda)
 
 
 
