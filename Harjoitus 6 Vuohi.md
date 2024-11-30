@@ -68,6 +68,39 @@ ZAProxy ei näyttänyt hijack_cookie arvoa, joten en voinut sitä käyttää, en
 
 Tässä vaiheessa olin jumissa. En keksinyt mitä työkalua käyttää tai mitä yrittää. Päätin katsoa löytämääni [videota](https://www.youtube.com/watch?v=R5YPRhM5GyE), ainakin siihen asti, että saisin vinkin seuraavasta askeleesta, sillä WebGoatin vinkeistä ei ollut juurikaan apua.
 
+Kävin välissä nukkumassa ja tehtävä jatkui *30.11.2024 klo 8:26*
+
+Ennen videota kuitenkin halusin vielä miettiä mitä tiedän ja miten oletin hyökkäyksen tapahtuvan:
+- Sessioilla on juokseva numerointi, mikäli saisin nopeasti luotua monta tokenia niin välissä oleva olisi jonkin muun käyttämä.
+- Tähän väliin osuneen sessio on ajan määrittämä, joten sen lopun arvaamista varten minun pitäisi ajaa saadut ajat läpi yli hypätylle sessio numerolle.
+
+Ensimmäinen ongelmani ZAPilla oli, etten nähnyt hijack_cookie keksiä ZAPissa
+
+Ennen kuin pääsin sitä ratkomaan tuli ongelmaksi, ettei ZAP kaapannut mitään liikennettä vaikka proxy oli päällä ja eilen kaikki toimi samoilla asetuksilla.
+
+![kuva](https://github.com/user-attachments/assets/b8016419-ff51-41c3-99c2-19400967cc5f)
+
+Hetken vihaani pannukakkuja tehneenä ja mieleni rauhoittaneena tajusin, että olin kirjoittanut edellisellä kerralla osoitteen suoraan 127.0.0.1:8888 ja tällä kertaa käytin "localhost"
+Lisäsin sen listaan ja katsoin miten käy.
+
+![kuva](https://github.com/user-attachments/assets/360d69a9-0344-4192-9ccb-c08c649837f2)
+
+Ongelma ratkaistu.
+
+Seuraavaksi keksien kimppuun.
+
+![kuva](https://github.com/user-attachments/assets/4abba6fe-ade0-4aad-b485-7181c8108d38)
+
+Tänään oikea keksi näkyi heti, olin edellisellä kerralla oletettavasti kaapannut liikennettä ennen keksin määrittämistä.
+
+
+
+
+
+
+
+
+
 
 
 
