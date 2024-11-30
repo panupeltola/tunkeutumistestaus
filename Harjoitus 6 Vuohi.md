@@ -465,6 +465,67 @@ Tehtävä ratkaistu.
 
 ![kuva](https://github.com/user-attachments/assets/82e2befc-79c9-49e3-a5c8-b043d2a933a0)
 
+# e) Client side
+
+## Bypass front-end restrictions
+
+Tehtävän tarkoituksena oli muokata front-end pyyntöjä saavuttaakseen halutun lopputuloksen.
+
+### Field Restrictions
+
+Aloitin lähettämällä lomakkeen. Tarkoituksena oli muokata sitä siten, että jokainen lomakkeen kenttä on muokattu ohjeen vastaiseksi.
+
+![kuva](https://github.com/user-attachments/assets/123bf2c7-18c6-424b-af09-3d85d22ae63a)
+
+ZAPissa nämä kaikki vaihtoehdot näkyivät plaintextinä. Yritin muuttaa niitä repeaterissa josko se riittäisi.
+
+Sain vain "400 Bad request" vastauksia. Huomasin, että olin jättäny lomakkeesta kohden checkbox=on pois. Tämä rikkoi koko lomakkeen. Päätin yrittää muuttaa arvoja yksi kerrallaan.
+Jos jokin ei toimisi, näkisin mikä se on.
+
+Nopea WebGoatin uudelleen käynnistys ja homma jatkui.
+
+Tässä tehtävässä oli outo tarkistus, lopulta sain sen menemään läpi, kun lisäsin vain riittävästi outoa tavaraa eri formin osiin. 
+
+![kuva](https://github.com/user-attachments/assets/4f194699-7f1b-4ab7-aca5-f5e470367fa7)
+
+Esimerkiksi alla oleva ei kelvannut:
+
+![kuva](https://github.com/user-attachments/assets/965e484a-e071-40fd-8ccf-8b4ce10ae386)
+
+### Validation
+
+Viimeisessä kohdassa pitää ohittaa validointi ja lähettää pahaa tavaraa eteenpäin.
+
+Painan ensin Submit, jotta saan lomakkeen ZAPiin
+
+Koetin myös syöttää virheellisen kentän nähdäkseni mikä niissä on erona.
+
+Lomakkeessa on näköjään error arvo. Jos sen jättää nollaksi olettaisin muutosten menevän läpi.
+
+Jonkin aikaa törmäsin taas samaan ongelmaan, että vaikka kentät oli muutettu ei muutos kelvannut.
+
+![kuva](https://github.com/user-attachments/assets/d2a825c9-6264-4bed-adc2-b060696b0f76)
+
+Sain kuitenkin ongelman lopulta ratkaistua kun lisäsin riittävästi kamaa.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
