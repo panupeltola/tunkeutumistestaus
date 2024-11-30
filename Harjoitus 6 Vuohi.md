@@ -93,6 +93,244 @@ Seuraavaksi keksien kimppuun.
 
 Tänään oikea keksi näkyi heti, olin edellisellä kerralla oletettavasti kaapannut liikennettä ennen keksin määrittämistä.
 
+Löysin ZAP dokumentaation lisäosasta, jonka pitäisi tuottaa juurikin tuota haluamaani tietoa.
+
+![kuva](https://github.com/user-attachments/assets/8d046ca7-0d66-4b1e-b6fb-5f2ba3058dc8)
+
+Latasin haluamani lisäosan ZAP proxyyn.
+
+Nyt sain mahdollisuuden generoida tokeneita.
+
+Työkalu antoi kuitnkin jokaisesta pyynnöstä vastauksen 401 Unauthorized.
+
+Päätin tässä vaiheessa mennä videon pariin ja siinä käytettiin Burpsuitea, joten avasin ohjelman.
+
+## Burp
+
+Burpsuitessa valitaan ensin POST pyyntö, jonka yhteydessä hijack_cookie on luotu. Tämä pyyntö lähetetään ominaisuuteen nimeltä Sequencer ja aloitetaan ominaisuus "Start live capture".
+Käytännössä mitä ymmärtääkseni tämä tekee on lähettää erittäin monia POST pyyntöjä sisäänkirjautumista varten. POST pyyntö ja keksin luonti tapahtuivat sillä hetkellä, kun yritin kirjautua sisään.
+Oletettavasti sillä hetkellä myös sivu luo uuden keksin, joka sisäänkirjautumisen onnistuessa pysyy käyttäjällä aktiivisena ja sen liittäminen omaan selaimeen päästää kirjautumaan sisään halutulla vaihtoehdolla.
+
+![kuva](https://github.com/user-attachments/assets/b0dc44b9-12a9-4eca-a64d-8527059e7afa)
+
+![kuva](https://github.com/user-attachments/assets/dba40f7d-6819-43ad-b3b0-b77264e210d4)
+
+Ajettuani komennon katsoin tiedostoa johon ne olin tallentanut:
+
+![kuva](https://github.com/user-attachments/assets/aabeca6b-333a-46e3-ad44-f8ec7450dfed)
+
+Tässä huomasin, että palvelimien vastauksien epätasaisuuden vuoksi lista ei ollut täysin järjestyksessä ja yritin säätää sen ensin kuntoon. Tein sen komennolla 'sort -n tokens.txt > tokenssort.txt'
+
+Nyt katsoessani listaa huomaan katsoin puuttuvia tokeneita komennolla 'tail -10 tokenssort.txt'. Komento näyttää kymmenen viimeistä riviä tekstitiedostosta
+
+![kuva](https://github.com/user-attachments/assets/2600f802-68fb-496c-8ce7-5ac37526ce05)
+
+Huomasin, että näistä kymmenestä puuttuu 71 ja 78 loppuiset sessiot.
+
+78 kuitenkin saattaa johtua vain siitä ettei palvelin ole ehtinyt vastata.
+
+Yrtiin siis murtaa tokenia 71.
+
+Koska sitä ympäröivät keksit olivat:
+
+8593078645793923770-1732951095310 ja 8593078645793923772-1732951095311
+
+Pystyin päättelemään tästä ajan olevan joko 310 tai 311 loppuinen.
+Vaikka tokenit olivat eri järjestyksessä ladatussa tiedostossa palvelimen vastauksesta johtuen, mikään myöhemmin tehty post pyyntö ei ikinä ole loppunumeron ajasta otettussa numerossa alempana kuin aiemmin tehty pyyntö. 
+
+![kuva](https://github.com/user-attachments/assets/467298c0-5839-49a1-974c-103061cd173b)
+
+*Ote sortatusta keksiluettelosta*
+
+Koska vaihtoehtoja oli vain kaksi päätin yrittää syöttää niitä käsin hijack_cookie osaan, päivittää sivun ja kirjautua sisään.
+
+Kumpikaan näistä ei toiminut. En keksinyt mikä tässä oli vikana, joten jatkoin videon katsomista. Ehkä kirjautumistavassani oli vikaa.
+
+Ohjevideossa käytettiin Burpsuiten Intruder ominaisuutta. Päätin yrittää samaa. Siinä myös todettiin, että mikäli yksi numero ei toimi valitse vain toinen. Näin tein.
+
+Seuraavat arvot, joita tutkin olivat:
+8593078645793923758-1732951095289
+8593078645793923760-1732951095295
+
+Eli 59 loppuinen oli se mitä hain. Näissä myös aika välissä oli hiukan pidempi.
+
+Käytin ohjeen mukaan Burpsuiten Intruder osiota ja lisäsin viimeiselle kahdelle numerolle payloadin, joka kasvaa yhdellä ja yrittää kaikki kahden kirjautumisen välillä olleet ajat läpi.
+
+![kuva](https://github.com/user-attachments/assets/d9a2ad8d-b75d-4aae-a5fa-f23bc25dfcc0)
+
+Painoin "Start attack" nappia.
+
+![kuva](https://github.com/user-attachments/assets/f1fdc44f-326c-499b-92cb-7c7204e6968a)
+
+Mikään vaihtoehto ei toiminut.
+
+Nyt kun osasin tavan päätin yrittää tehdä asiat uusiksi, mikäli tokenit olisivat vanhentuneet ja yrittää sopivaa väliä, kunnes jokin toimisi.
+
+Yritin samaa monta kertaa, mutta mikään välissä olleista ei kelvannut.
+
+Päätin yrittää vielä samaa löytämäni [ohjeen](https://docs.cycubix.com/application-security-series/web-application-security-essentials/solutions/a5-broken-access-control/a1-2021-or-hijack-a-session-or-cycubix-docs/a1-2021-or-hijack-a-session-2-or-cycubix-docs) mukaan ZAPilla.
+
+Siinä tehdään sama, mutta manuaalisesti.
+
+Löysin välin käsin lähettämistäni POST pyyntöjen Response headereista väliltä.
+
+8593078645793932782-1732954305052
+8593078645793932784-1732954305218
+
+Säädin ZAPin Fuzzeriin oikean aikavälin.
+
+Ensimmäisellä yrityksellä sain ison kasan 500 virheitä, oletettavasti johtuen liian nopeista pyynnöistä.
+
+Toiselle kierrokselle laitoin 10 ms viiveen jokaisen Fuzzin välille.
+
+![kuva](https://github.com/user-attachments/assets/b5920613-fb60-4d0a-8e8e-d816ba20b8ef)
+
+Mikään ei tälläkään kertaa ollut oikein. Tässä vaiheessa olin aidosti jumissa. En keksinyt mikä tässä oli vielä väärin. Ymmärsin täysin logiikan, jolla välejä etsin ja sain sen tutkittua kahdella eri ohjelmalla, mutta mikään ei kelvannut vastaukseksi.
+
+Päätin jättää tehtävän tältä erää tähän ja palata myöhemmin sen pariin.
+
+## Insecure Direct Object References
+
+### Authenticate First, Abuse Authorization Later
+
+Tehtävässä piti löytää tapa ohittaa luvat kirjautumisen jälkeen.
+Kirjauduin sisään käyttäjällä tom:cat
+
+### Observing Differences & Behaviors
+
+Klikkasin "View Profile" nappia ja näin, että näytetyn lisäksi ZAP näytti minulle vielä role ja userID kentän
+
+![kuva](https://github.com/user-attachments/assets/b23b99f4-1798-48d3-b9e6-28b67ac9c927)
+
+Hetken yrittämisen jälkeen sain vielä vastauksen kirjoitettua oikeaan muotoon ja sain tehtävän raktaistua.
+
+![kuva](https://github.com/user-attachments/assets/6ee76036-2c29-4447-a82d-4289f32f507b)
+
+### 
+
+Seuraavassa kohdassa piti löytää vaihtoehtoinen reitti profiiliin.
+
+![kuva](https://github.com/user-attachments/assets/45b9e172-53e2-4165-b1f9-066c4100edd8)
+
+Katsoin tekemääni GET pyyntöä profiilia avatessani ja huomasin sivun */WebGoat/IDOR/profile
+
+Päätin yrittää kirjoittaa tätä selaimeen.
+
+![kuva](https://github.com/user-attachments/assets/f424d420-9acc-432d-be71-0aaa05566add)
+
+Tämä avasi itselleni profiilisivun JSON näkymän.
+
+Mietin miten tämän saisi tehtyä muulla tapaa, sillä selain tunnisti minut oletettavasti keksillä. Päätin koettaa miten käy jos laitan perään ainoan erottavan tekijän, eli userID:n
+
+![kuva](https://github.com/user-attachments/assets/7d3313c4-28a3-49da-9ecc-092d69ae82db)
+
+Sain eri virheilmoituksen tällä kertaa.
+Koetin siitä huolimatta polkua vastaukseksi ja sain oikein menneen raktaisun.
+
+![kuva](https://github.com/user-attachments/assets/388fa313-bfe2-4e82-a413-695e48edc546)
+
+### Playing with the Patterns
+
+Viimeisenä piti päästä jonkun muun käyttäjälle.
+
+Yritin ensin muokata vain yhtä numeroa userID kohdassa.
+
+Tämä aiheutti vain 500 errorin, eli yksinkertainen numeron nostaminen ei tässä riitä.
+
+Yritin siis fuzzata 100 seuraavaa numeroa nähdäkseni toimiiko näistä mikään.
+
+![kuva](https://github.com/user-attachments/assets/cb6528c6-0fa2-4a92-ae32-e053d544223e)
+
+Löysin yhden käyttäjän.
+
+![kuva](https://github.com/user-attachments/assets/06f992c1-3e71-4969-810d-80faeb056b95)
+
+
+![kuva](https://github.com/user-attachments/assets/93aac5ec-6ac3-4277-af5a-88a641f24013)
+
+Seuraavaksi tätä piti saada muokattua.
+
+Luin Restful API:n dokumentaatiota ja huomasin, että muokkaus tapahtui komennolla PUT.
+
+Päätinkin siis yrittää vaihtaa ensin oman käyttäjäni roolia komennolla 'PUT http://localhost:8888/WebGoat/IDOR/profile/2342384' ja laittamalla alla olevaan kenttään muuten samat arvot, mutta kohtaan role arvon 1.
+
+![kuva](https://github.com/user-attachments/assets/dcf398d5-f5fc-4bb7-9ef6-94fc2d567432)
+
+Olin jälleen muuttanut maailmaa.
+
+Seuraavaksi piti muuttaa Billin arvoja.
+
+
+Päätin muuttaa Buffalo Billin nimen Chill Billiksi kuvaamaan paremmin hänen luonnettaan.
+
+![kuva](https://github.com/user-attachments/assets/4e6e7a67-146b-4c82-bf13-72e6824262af)
+
+Totesin, että nimen vaihto tuottaa virheen
+
+![kuva](https://github.com/user-attachments/assets/bf8ef48b-84d5-442a-9b10-42d2599ad1d9)
+
+Roolin kuitenkin pystyin vaihtamaan. Tämä antoi seuraavan haasteen muuttaa väri mikä ei ollut kuin sanan muutos PUT komentoon.
+
+![kuva](https://github.com/user-attachments/assets/a620a642-d374-4e6c-abf9-b57a936abdc2)
+
+Nyt oli tehtävä ratkaistu.
+
+## Missing Function Level Access Control
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
