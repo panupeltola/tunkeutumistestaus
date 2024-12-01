@@ -611,6 +611,8 @@ Ajon jälkeen:
 
 ![kuva](https://github.com/user-attachments/assets/1c815519-80fd-4f7b-a98c-94ab613a0bda)
 
+## Panu Peltola 2024
+
 
 # Lähteet
 1. T. Karvinen, 2024, [Tunkeutumistestaus](https://terokarvinen.com/tunkeutumistestaus/), Luettu 1.12.2024
