@@ -579,7 +579,7 @@ Muistin luennolla tekemästäni harjoituksesta, että komennon alkuun piti lisä
 Ensimmäinen yritys.
 
 Tämä ei toiminut, ilmeisesti kommenttimerkki hämäsi tässäkin yhteydessä.
-Yritin myös tapoja '#debug' ja '\#debug' nämä eivät kuitenkaan toimineet, sillä kaikki muuttuivat kommenteiksi.
+Yritin myös tapoja '#debug' ja '\\#debug' nämä eivät kuitenkaan toimineet, sillä kaikki muuttuivat kommenteiksi.
 
 Päätin lisätä siis hyödyllisen ominaisuuden, joka poistaa kaikki rivit, joilla on sana print.
 
