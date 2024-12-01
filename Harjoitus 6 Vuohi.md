@@ -355,6 +355,7 @@ Päätin yrittää kirjata äsken löytämiäni arvoja tähän polkuun.
 ![kuva](https://github.com/user-attachments/assets/c740164d-687a-427b-b069-800b5fae1652)
 
 *Config*
+
 Näistä vain users antoi järkevän ratkaisun ja sekin antoi virheen 415 "Unsupported Media Type"
 
 Luin Mozillan [dokumentaatiota](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/415) aiheesta ja siellä huomautettiin, että vastaus ilmoittaa oikean tyyppisen viestin.
