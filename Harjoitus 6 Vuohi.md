@@ -302,7 +302,7 @@ Löysin yhden käyttäjän.
 
 Seuraavaksi tätä piti saada muokattua.
 
-Luin Restful API:n dokumentaatiota ja huomasin, että muokkaus tapahtui komennolla PUT.
+Luin Restful API:n [dokumentaatiota](https://restfulapi.net/rest-put-vs-post/) ja huomasin, että muokkaus tapahtui komennolla PUT.
 
 Päätinkin siis yrittää vaihtaa ensin oman käyttäjäni roolia komennolla 'PUT http://localhost:8888/WebGoat/IDOR/profile/2342384' ja laittamalla alla olevaan kenttään muuten samat arvot, mutta kohtaan role arvon 1.
 
@@ -311,7 +311,6 @@ Päätinkin siis yrittää vaihtaa ensin oman käyttäjäni roolia komennolla 'P
 Olin jälleen muuttanut maailmaa.
 
 Seuraavaksi piti muuttaa Billin arvoja.
-
 
 Päätin muuttaa Buffalo Billin nimen Chill Billiksi kuvaamaan paremmin hänen luonnettaan.
 
