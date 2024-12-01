@@ -45,7 +45,7 @@ Webgoat oli asennettu.
 
 Harjoituksen tarkoituksena on arvata "hijack_cookie" arvo
 
-Kaappasin liikennettä ja huomasin kohdan JSESSIONID=zEbHaV7SkZw3QEPu_rSZUeOcGpkyZnYNaI4fHPEO.
+Kaappasin liikennettä ja huomasin kohdan JSESSIONID.
 
 Tämä ei suoranaisesti kertonut itselleni mitään. Koodit näyttivät satunnaisilta. Tämä ei myöskään ollut keksi, jota murtaa.
 Sen löysin Firefoxin "Cookies" osiosta.
