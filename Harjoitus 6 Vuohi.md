@@ -330,6 +330,8 @@ Nyt oli tehtävä ratkaistu.
 
 Aloitin kliksuttelemalla kaikki näppäimet läpi, mutta ZAPiin ei tullut mitään järkevää.
 
+Olin hiukan jumissa, joten katsoin WebGoatin vinkkejä, jotka ehdottivat sivun elementtien tutkimiseen, jonka käsitin selaimen dev toolsiksi.
+
 Yritin tämän jälkeen käyttää Inspect ominaisuutta selaimessa ja löysin riittävän pitkälle mentyäni valikon, jota ei näkynyt graaffisessa käyttöliittymässä.
 
 ![kuva](https://github.com/user-attachments/assets/dd97313d-fd67-470e-863e-bd35e5a05837)
