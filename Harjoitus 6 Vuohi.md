@@ -75,7 +75,7 @@ Ongelmaksi kuitenkin muodostuu, etten tiedä mistä tämän tekisin.
 ![kuva](https://github.com/user-attachments/assets/e334bb6b-bb2c-43f5-b4a0-d1660a90602a)
 
 Tarkastin vielä, ettei numeroiden välillä ollut vain jotain helppoa lukua.
-Tässä vaiheessa jouduin katsomaan apua vinkeistä ja sieltä näin, että ensimmäinen luku oli järjestysnumero ja seuraava numero oli Unix Epoch aika.
+Tässä vaiheessa jouduin katsomaan apua WebGoatin vinkeistä ja sieltä näin, että ensimmäinen luku oli järjestysnumero ja seuraava numero oli Unix Epoch aika.
 
 Tämä selittää miksi vain loppu muuttui eri keksin nollaamisien välillä.
 
@@ -495,7 +495,7 @@ Näin paketeista, että olin saanut paketin kaapattua, muoto oli jollain tavalla
 
 ![kuva](https://github.com/user-attachments/assets/ccda8487-644d-442f-8011-2c95d5b29f3b)
 
-Löysin tämän olevan suojattua JavaScriptiä googletettuani koko pötkön ja löysin sille kätevän [kääntäjän](https://lelinhtinh.github.io/de4js/) 
+Löysin tämän olevan suojattua JavaScriptiä googletettuani koko pötkön löysin aiheesta [keskustelusta](https://stackoverflow.com/questions/60956505/how-to-decode-this-encoded-javascript) ja löysin hetken päästä sille kätevän [kääntäjän](https://lelinhtinh.github.io/de4js/) 
 
 Kuvassa oli listattu käyttäjänimi kohtaan 0 ja salasana kohtaan 1. Pythonissa listan esineet erotetaan pilkulla.
 
@@ -612,16 +612,13 @@ Ajon jälkeen:
 ![kuva](https://github.com/user-attachments/assets/1c815519-80fd-4f7b-a98c-94ab613a0bda)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+# Lähteet
+1. T. Karvinen, 2024, [Tunkeutumistestaus](https://terokarvinen.com/tunkeutumistestaus/), Luettu 1.12.2024
+2. T. Karvinen, 2023,  [Try Web Hacking on New Webgoat 2023.4 ](https://terokarvinen.com/2023/webgoat-2023-4-ethical-web-hacking/), Luettu 29.11.2024
+3. Security in Mind, 2023, [WebGoat Session Hijacking Tutorial: An In-Depth Guide](https://www.youtube.com/watch?v=R5YPRhM5GyE), Katsottu 1.12.2024
+4. Cycubix Documentetion, [2024, A1:2021 | Hijack a Session (2) | Cycubix Docs](https://docs.cycubix.com/application-security-series/web-application-security-essentials/solutions/a5-broken-access-control/a1-2021-or-hijack-a-session-or-cycubix-docs/a1-2021-or-hijack-a-session-2-or-cycubix-docs), Luettu 1.12.2024
+5. À. Blázquez, 2023, [Session Hijacking in OWASP WebGoat](https://olleb.com/OWASP-WebGoat-hijack-session/), Luettu 1.12.2024
+6. L. Gupta, 2023, [HTTP PUT vs. POST](https://restfulapi.net/rest-put-vs-post/), Luettu 30.11.2024
+7. Mozilla Foundation, [415 Unsupported Media Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/415), Luettu 30.11.2024
+8. StackOverflow, 2020, [How to decode this encoded Javascript?](https://stackoverflow.com/questions/60956505/how-to-decode-this-encoded-javascript), Luettu 30.11.2024
+9. T. Thiện, 2021, [de4js1 JavaScript Deobfuscator and Unpacker](https://lelinhtinh.github.io/de4js/), Luettu 30.11.2024
