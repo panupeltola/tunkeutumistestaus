@@ -189,6 +189,58 @@ Mikään ei tälläkään kertaa ollut oikein. Tässä vaiheessa olin aidosti ju
 
 Päätin jättää tehtävän tältä erää tähän ja palata myöhemmin sen pariin.
 
+## 1.12.2024
+
+Palaan vielä kerran tehtävän pariin päivän ja muiden tehtävien tauon jälkeen. Kävin vielä tekemäni tehtävän läpi, mutten keksi miksi ratkaisu ei toimi.
+
+Katsoin vielä kaksi erillistä ohjetta [Cycubixin](https://docs.cycubix.com/application-security-series/web-application-security-essentials/solutions/a5-broken-access-control/a1-2021-or-hijack-a-session-or-cycubix-docs/a1-2021-or-hijack-a-session-2-or-cycubix-docs) ja [Olle's Blogin](https://olleb.com/OWASP-WebGoat-hijack-session/) sivuilta.
+
+Molemmissa näissä käytettiin käytännössä samaa ratkaisua. Myöhemmissä tehtävissä kuitenkin huomasin, että joissain tapauksissa WebGoat vain sekoaa, eikä enää hyväksy vastauksia.
+
+Päätin koettaa Burpsuitea ja tehdä vain laajan fuzzaus pyynnön, jos joku toimisi.
+
+Tein aiemmin näytetyllä tavalla POST pyynnön, jonka lähetin Sequencer palveluun, jossa generoin tokenit ja sorttasin ne numerojärjestykseen.
+
+Yritin tällä kertaa myös hiukan hidastaa tokenien generoimista, sillä aiemmin niitä tuli niin nopeasti, etten tiedä häiritsikö se vastauksen generointia.
+
+Hidastin Sequencerin asetuksista hakujen välille 4 ms viiveen.
+
+![kuva](https://github.com/user-attachments/assets/957e1ab5-ba0f-43dc-b032-17873434037b)
+
+Aloitin luomisen.
+
+Katsoin viimeiset 100 hakua komennolla 'tail -100 tokenssort.txt'
+
+![kuva](https://github.com/user-attachments/assets/52de889d-20b2-4225-ac28-18a3b31dfe68)
+
+Päätin viedä tämän Burpsuiten Intruder palveluun ja Fuzzata koko välin.
+
+Jokin tällä ajalla ja välillä tulisi toimia. Jos ei, niin en enää keksi mitä tehdä.
+
+Väli oli:
+2755139993819201611-1733038049535 --> 2755139993819201729-1733038049716
+
+![kuva](https://github.com/user-attachments/assets/9ba49c79-b702-437e-abb3-bc0919fce12f)
+
+Yrittäessäni tätä totesin, että en pysty määrittämään kahdelle eri payloadille eri asetuksia. Tämä on oletettavasti vain pro versiolla Burpsuitessa.
+
+Yritetään sitten käsin.
+
+![kuva](https://github.com/user-attachments/assets/799dd2e0-db38-4529-9868-5ad6c3d94a4f)
+
+Loin tututusti payloadin ja aloitin hyökkäyksen.
+
+Tämäkään ei toiminut. Kävin läpi noin 10 välistä puuttuvaa numeroa, mutta mikään näistä ei toiminut. En keksi virhettäni, joten en saa tätä ratkaistua, vaikka tiedänkin jo ratkaisun.
+
+Hyökkäyksessä käytetään hyväksi heikkoa tokenien generointi menetelmää, jossa jokaisella sisäänkirjautumisyrityksellä tarkastetaan hijack_cookie token ja mikäli sellaista ei ole, se luodaan.
+Token koostuu kahdesta osasta, juoksevasta numerosta ja pyyntöhetken Unix Epoch timeen perustuvasta toisesta osasta.
+Näistä kahdesta voidaan päätellä, että jos massalla tuotetuista tokeneista puuttuu yksi järjestysnumero välistä, on se mahdollisesti jonkun sisäänkirjautuneen token. Aika tälle on kahden itse luodun tokenin väli.
+
+Ratkaisuna yritin automatisoida tokenien luonnin ja löytäessäni väliltä puuttuvia juoksevia numeroita, fuzzata sitä ympäröivien tokenien aikaan perustuvan luvun kaikki väliluvut ja lähettää niitä sisäänkirjautumisen POST pyyntönä. Tämä ei kuitenkaan toiminut monien yrityksieni jälkeenkään.
+
+*Tehtävää ei ratkaistu ainakaan WebGoatin mielestä*
+
+
 ## Insecure Direct Object References
 
 ### Authenticate First, Abuse Authorization Later
