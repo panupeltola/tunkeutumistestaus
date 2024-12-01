@@ -503,9 +503,9 @@ Klikkasin ensimmäisenä näppäintä Steal the Cheese.
 
 Epäonnistuminen jälleen.
 
-Lopulta ratkaisu oli niinkin yksinkertainen kuin kuvan nimen vaihtaminen tom.png --> jerry.png.
+Tarvitsin hiukan vinkeiltä apua, mutta lopulta ratkaisu oli niinkin yksinkertainen kuin kuvan nimen vaihtaminen tom.png --> jerry.png.
 
-Mutta harjoitus ratkaistu. Ylipäätään huomiona, että harjoituksissa on ollut isolta osin erittäin huonot ohjeistukset ja paljon aikaa on mennyt ihan vaan arvailuun mitä halutaan.
+Harjoitus ratkaistu. Ylipäätään huomiona, että harjoituksissa on ollut isolta osin erittäin huonot ohjeistukset ja paljon aikaa on mennyt ihan vaan sen arvailuun, mitä halutaan.
 
 ## Change the request, so the server gets information from http://ifconfig.pro
 
