@@ -1,3 +1,21 @@
+# Harjoitus 6 Vuohi
+
+Harjoitus on osa Tero Karvisen kurssia [Tunkeutumistestaus](https://terokarvinen.com/tunkeutumistestaus/) ja kaikki tehtävänannot on saatu kurssisivulta.
+
+# Ympäristö
+
+## Fyysinen ympäristö:
+- Intel i7-10700K @ 3,80GHz (AMD64)
+- Nvidia RTX 3080
+- 32 Gt RAM
+- Windows 11 Education 23H2
+
+## Virtuaaliympäristö (Kali)
+- Oracle VirtualBox 7.1.4
+- 8 Prosessoriydintä
+- 16 Gt RAM
+- Kali Linux 2024.3
+
 # x) Try Web Hacking on New Webgoat 2023.4
 
 - Ohjeessa ladataan Webgoatin versio 2023.4 ja siihen liittyvät paketit
@@ -6,7 +24,7 @@
 
 # a) Asenna Webgoat 2023.4
 
-Seurasin tehtävässä T. Karvisen ohjetta (https://terokarvinen.com/2023/webgoat-2023-4-ethical-web-hacking/)
+Seurasin tehtävässä T. Karvisen [ohjetta](https://terokarvinen.com/2023/webgoat-2023-4-ethical-web-hacking/)
 Aloitin lataamalla Webgoatin Github sivulta oikean paketin "Releases" osiosta
 
 ![kuva](https://github.com/user-attachments/assets/6b3be61b-3437-45d0-afb2-4168e82e1d15)
